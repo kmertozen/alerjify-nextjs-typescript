@@ -1,14 +1,4 @@
-* {
-  box-sizing: border-box;
-}
 body {
   background: #f9f9f9;
   margin: 0;
-  font-family: "Source Sans Pro", sans-serif;
-}
-a {
-  color: #111;
-  text-transform: capitalize;
-  text-decoration: none;
-  transition: all 0.3s ease-in-out 0s;
 }
