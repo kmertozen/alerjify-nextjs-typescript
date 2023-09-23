@@ -12,12 +12,17 @@ const imageHeightMap = {
 };
 
 export const SaveButton = styled.div`
+  color: #47c757;
   position: absolute;
   z-index: 99;
   right: 32px;
   top: 16px;
   opacity: 0;
   transition: all 0.3s ease-in-out;
+  border-radius: 50%;
+  background-color: #fff;
+  padding: 5px;
+  display: inline-flex;
 `;
 
 export const RecipeCardBase = styled.div<{ size: string }>`
@@ -36,6 +41,8 @@ export const RecipeCardBase = styled.div<{ size: string }>`
 
 export const RecipeCardImage = styled.div<{ size: string }>`
   overflow: hidden;
+  border-radius: 8px;
+
   img {
     transition: all 0.3s ease-in-out;
     width: 100%;

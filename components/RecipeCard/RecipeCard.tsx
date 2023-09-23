@@ -11,12 +11,13 @@ import {
 import { BsSave } from "react-icons/bs";
 import React from "react";
 import RecipeMetas from "../RecipeMetas/RecipeMetas";
+import { FaHeart } from "react-icons/fa";
 
 export default function RecipeCard({ size = "small" }: { size?: string }) {
   return (
     <RecipeCardBase size={size}>
       <SaveButton onClick={() => console.log("asd")}>
-        <BsSave size={22} />
+        <FaHeart size={18} />
       </SaveButton>
       <RecipeCardImage size={size}>
         <a href="#">
