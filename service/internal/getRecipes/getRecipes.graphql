@@ -1,0 +1,9 @@
+query getRecipes {
+  recipes {
+    data {
+      attributes {
+        recipeName
+      }
+    }
+  }
+}

@@ -6,26 +6,34 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.4",
+    "@graphql-codegen/typescript-rtk-query": "^2.4.1",
     "@types/node": "20.2.1",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "@types/react-slick": "^0.23.10",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6",
     "next": "13.4.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^4.8.0",
+    "react-icons": "^4.11.0",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.0.0-rc.1",
     "styled-normalize": "^8.0.7",
-    "typescript": "5.0.4"
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/near-operation-file-preset": "^2.5.0",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
     "babel-plugin-styled-components": "latest"
   }
 }
