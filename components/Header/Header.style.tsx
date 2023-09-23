@@ -9,14 +9,15 @@ export const HeaderContainer = styled.div`
   border-bottom: 1px solid #eeeeee;
 `;
 
-export const Navbar = styled.div`
+export const Navbar = styled.nav`
   display: flex;
-  max-width: 1240px;
-  margin: 0 auto;
+  max-width: 1140px;
+  margin: 0 auto -5px;
   background-color: #fff;
   padding: 0 16px;
   a {
     display: block;
     padding: 21px 16px;
+    font-weight: 600;
   }
 `;

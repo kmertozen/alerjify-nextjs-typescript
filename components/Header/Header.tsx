@@ -2,7 +2,6 @@ import { HeaderContainer, Navbar } from "./Header.style";
 
 import Link from "next/link";
 import React from "react";
-import styles from "./Header.module.css";
 import { useRouter } from "next/router";
 
 function Header() {
@@ -13,7 +12,7 @@ function Header() {
   };
   return (
     <>
-      <HeaderContainer className={styles.bar}>
+      <HeaderContainer>
         <Link href="/">
           <img
             width="200"
