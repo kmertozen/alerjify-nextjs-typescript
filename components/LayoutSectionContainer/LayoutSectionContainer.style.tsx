@@ -1,10 +1,24 @@
 import { styled } from "styled-components";
 
-export const LayoutSectionContainerBase = styled.div<{ flex: boolean }>`
+export const LayoutSectionContainerBase = styled.div<{
+  flex: boolean;
+  headline: boolean;
+  bgcolor?: string;
+}>`
   display: ${(props) => (props.flex ? "flex" : "block")};
-  background-color: #fff;
-  box-shadow: 0 20px 25px rgb(0 0 0 / 15%);
+  background-color: ${(props) => props.bgcolor || "#fff"};
+  box-shadow: ${(props) =>
+    props.headline ? "none" : "0 20px 25px rgb(0 0 0 / 15%)"};
   padding: 24px;
+  border-radius: ${(props) => (props.headline ? "0" : "8px")};
+  max-width: ${(props) => (props.headline ? "100%" : "1140px")};
+  margin: 0 auto;
   margin-bottom: 30px;
-  border-radius: 8px;
+`;
+
+export const TitleWrapper = styled.div`
+  max-width: 1140px;
+  margin: 0 auto;
+  color: #fff;
+  letter-spacing: 1px;
 `;
