@@ -13,7 +13,11 @@ const config: CodegenConfig = {
       presetConfig: {
         baseTypesPath: "../generated/graphql.ts",
       },
-      plugins: ["typescript", "typescript-operations", "typescript-rtk-query"],
+      plugins: [
+        "typescript",
+        "typescript-operations",
+        "typescript-react-query",
+      ],
     },
   },
 };
