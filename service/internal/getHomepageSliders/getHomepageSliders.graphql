@@ -1,0 +1,36 @@
+query getHomepageSliders {
+  homepage {
+    data {
+      attributes {
+        slider {
+          recipes {
+            data {
+              attributes {
+                recipeTitle
+                slug
+                recipeDescription
+                preparationTime
+                likeCount
+                recipeImages {
+                  data {
+                    attributes {
+                      url
+                    }
+                  }
+                }
+                categories {
+                  data {
+                    attributes {
+                      categoryTitle
+                      categorySlug
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

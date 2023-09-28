@@ -1,10 +1,12 @@
+import { gql } from "@apollo/client";
 import client from "../apolloClient";
-import { GetRecipesQuery } from "./getRecipes.generated";
-import { getRecipes } from "./getRecipes.graphql";
+import { GetRecipesDocument, GetRecipesQuery } from "./getRecipes.generated";
 
 export const getRecipesData = async () => {
   const { data } = await client.query<GetRecipesQuery>({
-    query: getRecipes,
+    query: gql`
+      ${GetRecipesDocument}
+    `,
   });
   return data;
 };

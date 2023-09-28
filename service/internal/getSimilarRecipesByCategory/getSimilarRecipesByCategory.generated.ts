@@ -1681,33 +1681,56 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
-export type GetRecipesQueryVariables = Types.Exact<{ [key: string]: never; }>;
+export type GetSimilarRecipesByCategoryQueryVariables = Types.Exact<{
+  recipeSlug?: Types.InputMaybe<Types.Scalars['String']['input']>;
+  categorySlug?: Types.InputMaybe<Types.Scalars['String']['input']>;
+}>;
 
 
-export type GetRecipesQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeTitle: string } | null }> } | null };
+export type GetSimilarRecipesByCategoryQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeTitle: string, slug: string, updatedAt?: any | null, likeCount?: number | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null } | null }> } | null };
 
 
-export const GetRecipesDocument = `
-    query getRecipes {
-  recipes {
+export const GetSimilarRecipesByCategoryDocument = `
+    query getSimilarRecipesByCategory($recipeSlug: String, $categorySlug: String) {
+  recipes(
+    filters: {and: [{categories: {categorySlug: {eq: $categorySlug}}}, {slug: {ne: $recipeSlug}}]}
+  ) {
     data {
       attributes {
         recipeTitle
+        slug
+        updatedAt
+        likeCount
+        recipeImages {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        categories {
+          data {
+            attributes {
+              categoryTitle
+              categorySlug
+            }
+          }
+        }
       }
     }
   }
 }
     `;
-export const useGetRecipesQuery = <
-      TData = GetRecipesQuery,
+export const useGetSimilarRecipesByCategoryQuery = <
+      TData = GetSimilarRecipesByCategoryQuery,
       TError = unknown
     >(
       dataSource: { endpoint: string, fetchParams?: RequestInit },
-      variables?: GetRecipesQueryVariables,
-      options?: UseQueryOptions<GetRecipesQuery, TError, TData>
+      variables?: GetSimilarRecipesByCategoryQueryVariables,
+      options?: UseQueryOptions<GetSimilarRecipesByCategoryQuery, TError, TData>
     ) =>
-    useQuery<GetRecipesQuery, TError, TData>(
-      variables === undefined ? ['getRecipes'] : ['getRecipes', variables],
-      fetcher<GetRecipesQuery, GetRecipesQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetRecipesDocument, variables),
+    useQuery<GetSimilarRecipesByCategoryQuery, TError, TData>(
+      variables === undefined ? ['getSimilarRecipesByCategory'] : ['getSimilarRecipesByCategory', variables],
+      fetcher<GetSimilarRecipesByCategoryQuery, GetSimilarRecipesByCategoryQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetSimilarRecipesByCategoryDocument, variables),
       options
     );

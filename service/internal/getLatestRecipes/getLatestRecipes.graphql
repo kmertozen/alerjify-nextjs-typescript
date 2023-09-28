@@ -1,0 +1,63 @@
+query getLatestRecipes($limit: Int) {
+  recipes(pagination: { limit: $limit }, sort: "createdAt:desc") {
+    data {
+      attributes {
+        slug
+        recipeTitle
+        recipeDescription
+        recipeDirections {
+          id
+          direction {
+            id
+            text
+            image {
+              data {
+                attributes {
+                  url
+                }
+              }
+            }
+          }
+        }
+        recipeImages {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        personCount
+        preparationTime
+        cookingTime
+        ingredients {
+          amount
+          ingredient {
+            data {
+              attributes {
+                ingredient_name
+              }
+            }
+          }
+        }
+        categories {
+          data {
+            attributes {
+              categoryTitle
+              categorySlug
+            }
+          }
+        }
+        tags {
+          data {
+            attributes {
+              tag_name
+              slug
+            }
+          }
+        }
+        likeCount
+        updatedAt
+      }
+    }
+  }
+}

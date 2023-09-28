@@ -1,0 +1,34 @@
+query getSimilarRecipesByCategory($recipeSlug: String, $categorySlug: String) {
+  recipes(
+    filters: {
+      and: [
+        { categories: { categorySlug: { eq: $categorySlug } } }
+        { slug: { ne: $recipeSlug } }
+      ]
+    }
+  ) {
+    data {
+      attributes {
+        recipeTitle
+        slug
+        updatedAt
+        likeCount
+        recipeImages {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        categories {
+          data {
+            attributes {
+              categoryTitle
+              categorySlug
+            }
+          }
+        }
+      }
+    }
+  }
+}

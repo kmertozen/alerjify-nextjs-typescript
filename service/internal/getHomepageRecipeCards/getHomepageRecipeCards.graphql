@@ -1,0 +1,36 @@
+query getHomepageRecipeCards {
+  homepage {
+    data {
+      attributes {
+        recipeCards {
+          recipes {
+            data {
+              attributes {
+                recipeTitle
+                slug
+                recipeDescription
+                preparationTime
+                likeCount
+                recipeImages {
+                  data {
+                    attributes {
+                      url
+                    }
+                  }
+                }
+                categories {
+                  data {
+                    attributes {
+                      categoryTitle
+                      categorySlug
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
