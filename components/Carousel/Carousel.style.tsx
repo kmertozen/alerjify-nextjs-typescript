@@ -72,7 +72,7 @@ export const HeroCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  bottom: -130px;
+  top: 375px;
   background-color: #fff;
   padding: 24px 16px;
   margin: 0 auto;

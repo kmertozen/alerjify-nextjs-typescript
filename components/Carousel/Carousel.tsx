@@ -12,8 +12,9 @@ import React from "react";
 import RecipeMetas from "../RecipeMetas/RecipeMetas";
 import RecipeTitle from "../Titles/RecipeTitle/RecipeTitle";
 import Slider from "react-slick";
+import { Recipe } from "@/generated/graphql";
 
-const Carousel = () => {
+const Carousel = ({ slides }: { slides: Recipe[] }) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -49,23 +50,38 @@ const Carousel = () => {
       <LayoutSectionContainer>
         <CarouselContainer>
           <Slider {...settings}>
-            <HeroSlider>
-              <img
-                src={`https://www.alerjify.com/images/recipes/resim2.jpg`}
-                alt={"recipe.yemek_ad"}
-              />
-              <HeroCard>
-                <CategoryTitle href="/">Tatlı</CategoryTitle>
-                <RecipeTitle href="/">Tarif Adı</RecipeTitle>
-                <Rating value={5} />
-                <p>
-                  Folyo ile çerçeveli bir fırın tepsisini hizalayın. (Kırışıklık
-                  olmamasına dikkat edin.)&nbsp;Orta boy bir kapta eritilmiş
-                  çikolata ve fı...
-                </p>
-                <RecipeMetas author="mert" time="20 dk" likes="20" />
-              </HeroCard>
-            </HeroSlider>
+            {slides.map(
+              (
+                {
+                  recipeTitle,
+                  recipeDescription,
+                  preparationTime,
+                  likeCount,
+                  categories,
+                },
+                index
+              ) => (
+                <HeroSlider key={index}>
+                  <img
+                    src={`https://www.alerjify.com/images/recipes/resim2.jpg`}
+                    alt={recipeTitle}
+                  />
+                  <HeroCard>
+                    <CategoryTitle href="/">
+                      {categories?.data[0].attributes?.categoryTitle}
+                    </CategoryTitle>
+                    <RecipeTitle href="/">{recipeTitle}</RecipeTitle>
+                    <Rating value={5} />
+                    <p>{recipeDescription?.substring(0, 100)}...</p>
+                    <RecipeMetas
+                      author="mert"
+                      time={`${preparationTime} dk`}
+                      likes={likeCount?.toString() ?? "0"}
+                    />
+                  </HeroCard>
+                </HeroSlider>
+              )
+            )}
           </Slider>
         </CarouselContainer>
       </LayoutSectionContainer>
