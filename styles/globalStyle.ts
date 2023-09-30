@@ -64,6 +64,10 @@ ${normalize}
     }
     .navigator-left, .navigator-right {
       opacity: 1;
+      &:hover{
+        background-color: #47c757;
+        color: #fff;
+      }
     }
   }
   
