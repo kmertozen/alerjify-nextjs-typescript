@@ -31,6 +31,7 @@ import Directions from "../Directions/Directions";
 import { Recipe } from "@/generated/graphql";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { prepareImageUrl } from "@/utils/image";
 
 const RecipeInfo = ({ recipe }: { recipe: Recipe }) => {
   const {
@@ -41,6 +42,7 @@ const RecipeInfo = ({ recipe }: { recipe: Recipe }) => {
     preparationTime,
     ingredients,
     recipeDirections,
+    recipeImages,
     tags,
     likeCount,
     updatedAt,
@@ -68,7 +70,7 @@ const RecipeInfo = ({ recipe }: { recipe: Recipe }) => {
       </RecipeMetas>
       <RecipeImageWrapper>
         <img
-          src="https://www.alerjify.com/images/recipes/smoky-grilled-steak.jpg"
+          src={prepareImageUrl(recipeImages?.data?.attributes?.url)}
           alt="recipe"
         />
       </RecipeImageWrapper>
