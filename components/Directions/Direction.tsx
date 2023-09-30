@@ -22,14 +22,15 @@ const Direction = ({
         <Step>{index}. adım</Step>
       </StepWrapper>
       <Description>
-        <StepImage>
-          <Image
-            src="https://www.alerjify.com/images/recipes/resim4.jpg"
-            alt="recipe"
-            fill
-            style={{ objectFit: "cover" }}
-          />
-        </StepImage>
+        {direction?.image?.data && (
+          <StepImage>
+            <img
+              src={direction?.image?.data?.attributes?.url}
+              alt={`${index}. adım fotoğrafı`}
+              style={{ objectFit: "cover" }}
+            />
+          </StepImage>
+        )}
         <p>{direction?.text}</p>
       </Description>
     </DirectionWrapper>
