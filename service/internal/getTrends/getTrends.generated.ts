@@ -1681,58 +1681,28 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
-export type GetLatestRecipesQueryVariables = Types.Exact<{
+export type GetTrendsQueryVariables = Types.Exact<{
   limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  page?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  pageSize?: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 
-export type GetLatestRecipesQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', slug: string, recipeTitle: string, recipeDescription?: string | null, personCount?: string | null, preparationTime?: string | null, cookingTime?: string | null, likeCount?: number | null, updatedAt?: any | null, recipeDirections?: { __typename?: 'ComponentRecipeDirections', id: string, direction?: Array<{ __typename?: 'ComponentRecipeDirection', id: string, text?: string | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null> | null } | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, ingredients: Array<{ __typename?: 'ComponentRecipeIngredient', amount?: string | null, ingredient?: { __typename?: 'IngredientEntityResponse', data?: { __typename?: 'IngredientEntity', attributes?: { __typename?: 'Ingredient', ingredient_name?: string | null } | null } | null } | null } | null>, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', tag_name: string, slug: string } | null }> } | null } | null }> } | null };
+export type GetTrendsQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeTitle: string, slug: string, recipeDescription?: string | null, preparationTime?: string | null, likeCount?: number | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null } | null }> } | null };
 
 
-export const GetLatestRecipesDocument = `
-    query getLatestRecipes($limit: Int, $page: Int, $pageSize: Int) {
-  recipes(
-    pagination: {limit: $limit, page: $page, pageSize: $pageSize}
-    sort: "createdAt:desc"
-  ) {
+export const GetTrendsDocument = `
+    query getTrends($limit: Int) {
+  recipes(sort: "likeCount:desc", pagination: {limit: $limit}) {
     data {
       attributes {
-        slug
         recipeTitle
+        slug
         recipeDescription
-        recipeDirections {
-          id
-          direction {
-            id
-            text
-            image {
-              data {
-                attributes {
-                  url
-                }
-              }
-            }
-          }
-        }
+        preparationTime
+        likeCount
         recipeImages {
           data {
             attributes {
               url
-            }
-          }
-        }
-        personCount
-        preparationTime
-        cookingTime
-        ingredients {
-          amount
-          ingredient {
-            data {
-              attributes {
-                ingredient_name
-              }
             }
           }
         }
@@ -1744,31 +1714,21 @@ export const GetLatestRecipesDocument = `
             }
           }
         }
-        tags {
-          data {
-            attributes {
-              tag_name
-              slug
-            }
-          }
-        }
-        likeCount
-        updatedAt
       }
     }
   }
 }
     `;
-export const useGetLatestRecipesQuery = <
-      TData = GetLatestRecipesQuery,
+export const useGetTrendsQuery = <
+      TData = GetTrendsQuery,
       TError = unknown
     >(
       dataSource: { endpoint: string, fetchParams?: RequestInit },
-      variables?: GetLatestRecipesQueryVariables,
-      options?: UseQueryOptions<GetLatestRecipesQuery, TError, TData>
+      variables?: GetTrendsQueryVariables,
+      options?: UseQueryOptions<GetTrendsQuery, TError, TData>
     ) =>
-    useQuery<GetLatestRecipesQuery, TError, TData>(
-      variables === undefined ? ['getLatestRecipes'] : ['getLatestRecipes', variables],
-      fetcher<GetLatestRecipesQuery, GetLatestRecipesQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetLatestRecipesDocument, variables),
+    useQuery<GetTrendsQuery, TError, TData>(
+      variables === undefined ? ['getTrends'] : ['getTrends', variables],
+      fetcher<GetTrendsQuery, GetTrendsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetTrendsDocument, variables),
       options
     );

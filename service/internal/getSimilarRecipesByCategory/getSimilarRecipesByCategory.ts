@@ -10,13 +10,14 @@ import {
 
 export const getSimilarRecipesByCategoryData = async (
   recipeSlug: string,
-  categorySlug?: string
+  categorySlug?: string,
+  limit?: number
 ) => {
   const { data } = await client.query<GetSimilarRecipesByCategoryQuery>({
     query: gql`
       ${GetSimilarRecipesByCategoryDocument}
     `,
-    variables: { recipeSlug, categorySlug },
+    variables: { recipeSlug, categorySlug, limit },
   });
   const parseData = (
     data: GetSimilarRecipesByCategoryQuery

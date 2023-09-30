@@ -1,22 +1,11 @@
-query getSimilarRecipesByCategory(
-  $recipeSlug: String
-  $categorySlug: String
-  $limit: Int
-) {
-  recipes(
-    filters: {
-      and: [
-        { categories: { categorySlug: { eq: $categorySlug } } }
-        { slug: { ne: $recipeSlug } }
-      ]
-    }
-    pagination: { limit: $limit }
-  ) {
+query getTrends($limit: Int) {
+  recipes(sort: "likeCount:desc", pagination: { limit: $limit }) {
     data {
       attributes {
         recipeTitle
         slug
-        updatedAt
+        recipeDescription
+        preparationTime
         likeCount
         recipeImages {
           data {

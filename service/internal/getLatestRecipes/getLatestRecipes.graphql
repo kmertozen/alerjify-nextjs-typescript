@@ -1,5 +1,8 @@
-query getLatestRecipes($limit: Int) {
-  recipes(pagination: { limit: $limit }, sort: "createdAt:desc") {
+query getLatestRecipes($limit: Int, $page: Int, $pageSize: Int) {
+  recipes(
+    pagination: { limit: $limit, page: $page, pageSize: $pageSize }
+    sort: "createdAt:desc"
+  ) {
     data {
       attributes {
         slug

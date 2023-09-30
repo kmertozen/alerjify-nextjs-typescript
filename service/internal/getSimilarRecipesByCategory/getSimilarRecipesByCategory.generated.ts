@@ -1684,6 +1684,7 @@ export type UsersPermissionsUserRelationResponseCollection = {
 export type GetSimilarRecipesByCategoryQueryVariables = Types.Exact<{
   recipeSlug?: Types.InputMaybe<Types.Scalars['String']['input']>;
   categorySlug?: Types.InputMaybe<Types.Scalars['String']['input']>;
+  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 
@@ -1691,9 +1692,10 @@ export type GetSimilarRecipesByCategoryQuery = { __typename?: 'Query', recipes?:
 
 
 export const GetSimilarRecipesByCategoryDocument = `
-    query getSimilarRecipesByCategory($recipeSlug: String, $categorySlug: String) {
+    query getSimilarRecipesByCategory($recipeSlug: String, $categorySlug: String, $limit: Int) {
   recipes(
     filters: {and: [{categories: {categorySlug: {eq: $categorySlug}}}, {slug: {ne: $recipeSlug}}]}
+    pagination: {limit: $limit}
   ) {
     data {
       attributes {
