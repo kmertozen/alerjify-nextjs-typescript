@@ -15,7 +15,7 @@ const LatestRecipes = ({ initialRecipes }: { initialRecipes: Recipe[] }) => {
     const firstEntry = entries[0];
     if (firstEntry.isIntersecting && hasMore) {
       const more = (
-        await axios.get("http://localhost:3000/api/recent/", {
+        await axios.get("/api/recent/", {
           params: { page, pageSize: 6 },
         })
       ).data;
