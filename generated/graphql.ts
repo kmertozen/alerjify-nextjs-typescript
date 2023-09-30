@@ -185,9 +185,10 @@ export type BooleanFilterInput = {
 
 export type Category = {
   __typename?: 'Category';
-  category_desc?: Maybe<Scalars['String']['output']>;
-  category_name?: Maybe<Scalars['String']['output']>;
-  category_thumbnail?: Maybe<UploadFileEntityResponse>;
+  categoryDescription?: Maybe<Scalars['String']['output']>;
+  categoryImage?: Maybe<UploadFileEntityResponse>;
+  categorySlug: Scalars['String']['output'];
+  categoryTitle: Scalars['String']['output'];
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   recipes?: Maybe<RecipeRelationResponseCollection>;
@@ -221,8 +222,9 @@ export type CategoryEntityResponseCollection = {
 
 export type CategoryFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<CategoryFiltersInput>>>;
-  category_desc?: InputMaybe<StringFilterInput>;
-  category_name?: InputMaybe<StringFilterInput>;
+  categoryDescription?: InputMaybe<StringFilterInput>;
+  categorySlug?: InputMaybe<StringFilterInput>;
+  categoryTitle?: InputMaybe<StringFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<CategoryFiltersInput>;
@@ -233,10 +235,54 @@ export type CategoryFiltersInput = {
 };
 
 export type CategoryInput = {
-  category_desc?: InputMaybe<Scalars['String']['input']>;
-  category_name?: InputMaybe<Scalars['String']['input']>;
-  category_thumbnail?: InputMaybe<Scalars['ID']['input']>;
+  categoryDescription?: InputMaybe<Scalars['String']['input']>;
+  categoryImage?: InputMaybe<Scalars['ID']['input']>;
+  categorySlug?: InputMaybe<Scalars['String']['input']>;
+  categoryTitle?: InputMaybe<Scalars['String']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  recipes?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+};
+
+export type CategoryRelationResponseCollection = {
+  __typename?: 'CategoryRelationResponseCollection';
+  data: Array<CategoryEntity>;
+};
+
+export type ComponentComponentsRecipeCards = {
+  __typename?: 'ComponentComponentsRecipeCards';
+  id: Scalars['ID']['output'];
+  recipes?: Maybe<RecipeRelationResponseCollection>;
+};
+
+
+export type ComponentComponentsRecipeCardsRecipesArgs = {
+  filters?: InputMaybe<RecipeFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentComponentsRecipeCardsInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  recipes?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+};
+
+export type ComponentComponentsSlider = {
+  __typename?: 'ComponentComponentsSlider';
+  id: Scalars['ID']['output'];
+  recipes?: Maybe<RecipeRelationResponseCollection>;
+};
+
+
+export type ComponentComponentsSliderRecipesArgs = {
+  filters?: InputMaybe<RecipeFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentComponentsSliderInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
   recipes?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
 };
 
@@ -367,7 +413,33 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = Allergen | Allergy | Category | ComponentRecipeAllergen | ComponentRecipeDirection | ComponentRecipeDirections | ComponentRecipeIngredient | I18NLocale | Ingredient | Recipe | Tag | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = Allergen | Allergy | Category | ComponentComponentsRecipeCards | ComponentComponentsSlider | ComponentRecipeAllergen | ComponentRecipeDirection | ComponentRecipeDirections | ComponentRecipeIngredient | Homepage | I18NLocale | Ingredient | Recipe | Tag | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+
+export type Homepage = {
+  __typename?: 'Homepage';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  recipeCards?: Maybe<ComponentComponentsRecipeCards>;
+  slider?: Maybe<ComponentComponentsSlider>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type HomepageEntity = {
+  __typename?: 'HomepageEntity';
+  attributes?: Maybe<Homepage>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
+export type HomepageEntityResponse = {
+  __typename?: 'HomepageEntityResponse';
+  data?: Maybe<HomepageEntity>;
+};
+
+export type HomepageInput = {
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  recipeCards?: InputMaybe<ComponentComponentsRecipeCardsInput>;
+  slider?: InputMaybe<ComponentComponentsSliderInput>;
+};
 
 export type I18NLocale = {
   __typename?: 'I18NLocale';
@@ -553,6 +625,7 @@ export type Mutation = {
   deleteAllergen?: Maybe<AllergenEntityResponse>;
   deleteAllergy?: Maybe<AllergyEntityResponse>;
   deleteCategory?: Maybe<CategoryEntityResponse>;
+  deleteHomepage?: Maybe<HomepageEntityResponse>;
   deleteIngredient?: Maybe<IngredientEntityResponse>;
   deleteRecipe?: Maybe<RecipeEntityResponse>;
   deleteTag?: Maybe<TagEntityResponse>;
@@ -577,6 +650,7 @@ export type Mutation = {
   updateAllergy?: Maybe<AllergyEntityResponse>;
   updateCategory?: Maybe<CategoryEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
+  updateHomepage?: Maybe<HomepageEntityResponse>;
   updateIngredient?: Maybe<IngredientEntityResponse>;
   updateRecipe?: Maybe<RecipeEntityResponse>;
   updateTag?: Maybe<TagEntityResponse>;
@@ -761,6 +835,11 @@ export type MutationUpdateFileInfoArgs = {
 };
 
 
+export type MutationUpdateHomepageArgs = {
+  data: HomepageInput;
+};
+
+
 export type MutationUpdateIngredientArgs = {
   data: IngredientInput;
   id: Scalars['ID']['input'];
@@ -839,6 +918,7 @@ export type Query = {
   allergy?: Maybe<AllergyEntityResponse>;
   categories?: Maybe<CategoryEntityResponseCollection>;
   category?: Maybe<CategoryEntityResponse>;
+  homepage?: Maybe<HomepageEntityResponse>;
   i18NLocale?: Maybe<I18NLocaleEntityResponse>;
   i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>;
   ingredient?: Maybe<IngredientEntityResponse>;
@@ -895,6 +975,11 @@ export type QueryCategoriesArgs = {
 
 export type QueryCategoryArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QueryHomepageArgs = {
+  publicationState?: InputMaybe<PublicationState>;
 };
 
 
@@ -999,18 +1084,20 @@ export type QueryUsersPermissionsUsersArgs = {
 export type Recipe = {
   __typename?: 'Recipe';
   allergies?: Maybe<AllergyRelationResponseCollection>;
-  category?: Maybe<CategoryEntityResponse>;
+  categories?: Maybe<CategoryRelationResponseCollection>;
   cookingTime?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   ingredients: Array<Maybe<ComponentRecipeIngredient>>;
   isActive?: Maybe<Scalars['Boolean']['output']>;
+  likeCount?: Maybe<Scalars['Int']['output']>;
   personCount?: Maybe<Scalars['String']['output']>;
   preparationTime?: Maybe<Scalars['String']['output']>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   recipeDescription?: Maybe<Scalars['String']['output']>;
   recipeDirections?: Maybe<ComponentRecipeDirections>;
   recipeImages?: Maybe<UploadFileEntityResponse>;
-  recipeName?: Maybe<Scalars['String']['output']>;
+  recipeTitle: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
   tags?: Maybe<TagRelationResponseCollection>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -1018,6 +1105,14 @@ export type Recipe = {
 
 export type RecipeAllergiesArgs = {
   filters?: InputMaybe<AllergyFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type RecipeCategoriesArgs = {
+  filters?: InputMaybe<CategoryFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -1058,12 +1153,13 @@ export type RecipeEntityResponseCollection = {
 export type RecipeFiltersInput = {
   allergies?: InputMaybe<AllergyFiltersInput>;
   and?: InputMaybe<Array<InputMaybe<RecipeFiltersInput>>>;
-  category?: InputMaybe<CategoryFiltersInput>;
+  categories?: InputMaybe<CategoryFiltersInput>;
   cookingTime?: InputMaybe<StringFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   ingredients?: InputMaybe<ComponentRecipeIngredientFiltersInput>;
   isActive?: InputMaybe<BooleanFilterInput>;
+  likeCount?: InputMaybe<IntFilterInput>;
   not?: InputMaybe<RecipeFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<RecipeFiltersInput>>>;
   personCount?: InputMaybe<StringFilterInput>;
@@ -1071,24 +1167,27 @@ export type RecipeFiltersInput = {
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   recipeDescription?: InputMaybe<StringFilterInput>;
   recipeDirections?: InputMaybe<ComponentRecipeDirectionsFiltersInput>;
-  recipeName?: InputMaybe<StringFilterInput>;
+  recipeTitle?: InputMaybe<StringFilterInput>;
+  slug?: InputMaybe<StringFilterInput>;
   tags?: InputMaybe<TagFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type RecipeInput = {
   allergies?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  category?: InputMaybe<Scalars['ID']['input']>;
+  categories?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   cookingTime?: InputMaybe<Scalars['String']['input']>;
   ingredients?: InputMaybe<Array<InputMaybe<ComponentRecipeIngredientInput>>>;
   isActive?: InputMaybe<Scalars['Boolean']['input']>;
+  likeCount?: InputMaybe<Scalars['Int']['input']>;
   personCount?: InputMaybe<Scalars['String']['input']>;
   preparationTime?: InputMaybe<Scalars['String']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   recipeDescription?: InputMaybe<Scalars['String']['input']>;
   recipeDirections?: InputMaybe<ComponentRecipeDirectionsInput>;
   recipeImages?: InputMaybe<Scalars['ID']['input']>;
-  recipeName?: InputMaybe<Scalars['String']['input']>;
+  recipeTitle?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
 };
 
@@ -1559,7 +1658,49 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
+export type GetHomepageRecipeCardsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetHomepageRecipeCardsQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', attributes?: { __typename?: 'Homepage', recipeCards?: { __typename?: 'ComponentComponentsRecipeCards', recipes?: { __typename?: 'RecipeRelationResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeTitle: string, slug: string, recipeDescription?: string | null, preparationTime?: string | null, likeCount?: number | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null } | null }> } | null } | null } | null } | null } | null };
+
+export type GetHomepageSlidersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetHomepageSlidersQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', attributes?: { __typename?: 'Homepage', slider?: { __typename?: 'ComponentComponentsSlider', recipes?: { __typename?: 'RecipeRelationResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeTitle: string, slug: string, recipeDescription?: string | null, preparationTime?: string | null, likeCount?: number | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null } | null }> } | null } | null } | null } | null } | null };
+
+export type GetLatestRecipesQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetLatestRecipesQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', slug: string, recipeTitle: string, recipeDescription?: string | null, personCount?: string | null, preparationTime?: string | null, cookingTime?: string | null, likeCount?: number | null, updatedAt?: any | null, recipeDirections?: { __typename?: 'ComponentRecipeDirections', id: string, direction?: Array<{ __typename?: 'ComponentRecipeDirection', id: string, text?: string | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null> | null } | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, ingredients: Array<{ __typename?: 'ComponentRecipeIngredient', amount?: string | null, ingredient?: { __typename?: 'IngredientEntityResponse', data?: { __typename?: 'IngredientEntity', attributes?: { __typename?: 'Ingredient', ingredient_name?: string | null } | null } | null } | null } | null>, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', tag_name: string, slug: string } | null }> } | null } | null }> } | null };
+
+export type GetRecipeBySlugQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetRecipeBySlugQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', slug: string, recipeTitle: string, recipeDescription?: string | null, personCount?: string | null, preparationTime?: string | null, cookingTime?: string | null, likeCount?: number | null, updatedAt?: any | null, recipeDirections?: { __typename?: 'ComponentRecipeDirections', id: string, direction?: Array<{ __typename?: 'ComponentRecipeDirection', id: string, text?: string | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null> | null } | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, ingredients: Array<{ __typename?: 'ComponentRecipeIngredient', amount?: string | null, ingredient?: { __typename?: 'IngredientEntityResponse', data?: { __typename?: 'IngredientEntity', attributes?: { __typename?: 'Ingredient', ingredient_name?: string | null } | null } | null } | null } | null>, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', tag_name: string, slug: string } | null }> } | null } | null }> } | null };
+
 export type GetRecipesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetRecipesQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeName?: string | null } | null }> } | null };
+export type GetRecipesQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeTitle: string } | null }> } | null };
+
+export type GetSimilarRecipesByCategoryQueryVariables = Exact<{
+  recipeSlug?: InputMaybe<Scalars['String']['input']>;
+  categorySlug?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetSimilarRecipesByCategoryQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeTitle: string, slug: string, updatedAt?: any | null, likeCount?: number | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null } | null }> } | null };
+
+export type GetTrendsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetTrendsQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeTitle: string, slug: string, recipeDescription?: string | null, preparationTime?: string | null, likeCount?: number | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null } | null }> } | null };
