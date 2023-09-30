@@ -2,14 +2,15 @@ import LayoutSectionContainer from "../LayoutSectionContainer/LayoutSectionConta
 import React from "react";
 import RecipeCard from "../RecipeCard/RecipeCard";
 import { TrioBase } from "./Trio.style";
+import { Recipe } from "@/generated/graphql";
 
-export default function Trio() {
+export default function Trio({ cards }: { cards: Recipe[] }) {
   return (
     <LayoutSectionContainer>
       <TrioBase>
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
+        {cards.map((card, index) => (
+          <RecipeCard key={index} data={card} />
+        ))}
       </TrioBase>
     </LayoutSectionContainer>
   );

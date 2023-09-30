@@ -13,6 +13,8 @@ import RecipeMetas from "../RecipeMetas/RecipeMetas";
 import RecipeTitle from "../Titles/RecipeTitle/RecipeTitle";
 import Slider from "react-slick";
 import { Recipe } from "@/generated/graphql";
+import { getCategoryUrl, getRecipeDetailUrl } from "@/utils/url";
+import { prepareImageUrl } from "@/utils/image";
 
 const Carousel = ({ slides }: { slides: Recipe[] }) => {
   const settings = {
@@ -53,8 +55,10 @@ const Carousel = ({ slides }: { slides: Recipe[] }) => {
             {slides.map(
               (
                 {
+                  slug,
                   recipeTitle,
                   recipeDescription,
+                  recipeImages,
                   preparationTime,
                   likeCount,
                   categories,
@@ -62,15 +66,23 @@ const Carousel = ({ slides }: { slides: Recipe[] }) => {
                 index
               ) => (
                 <HeroSlider key={index}>
-                  <img
-                    src={`https://www.alerjify.com/images/recipes/resim2.jpg`}
-                    alt={recipeTitle}
-                  />
+                  <a href={getRecipeDetailUrl(slug)}>
+                    <img
+                      src={prepareImageUrl(recipeImages?.data?.attributes?.url)}
+                      alt={recipeTitle}
+                    />
+                  </a>
                   <HeroCard>
-                    <CategoryTitle href="/">
+                    <CategoryTitle
+                      href={getCategoryUrl(
+                        categories?.data[0].attributes?.categorySlug
+                      )}
+                    >
                       {categories?.data[0].attributes?.categoryTitle}
                     </CategoryTitle>
-                    <RecipeTitle href="/">{recipeTitle}</RecipeTitle>
+                    <RecipeTitle href={getRecipeDetailUrl(slug)}>
+                      {recipeTitle}
+                    </RecipeTitle>
                     <Rating value={5} />
                     <p>{recipeDescription?.substring(0, 100)}...</p>
                     <RecipeMetas

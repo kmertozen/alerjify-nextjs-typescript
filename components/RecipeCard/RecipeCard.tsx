@@ -12,28 +12,53 @@ import { BsSave } from "react-icons/bs";
 import React from "react";
 import RecipeMetas from "../RecipeMetas/RecipeMetas";
 import { FaHeart } from "react-icons/fa";
+import { Recipe } from "@/generated/graphql";
+import { getCategoryUrl, getRecipeDetailUrl } from "@/utils/url";
+import { prepareImageUrl } from "@/utils/image";
 
-export default function RecipeCard({ size = "small" }: { size?: string }) {
+export default function RecipeCard({
+  size = "small",
+  data,
+}: {
+  size?: string;
+  data: Recipe;
+}) {
+  const {
+    slug,
+    recipeTitle,
+    recipeDescription,
+    recipeImages,
+    preparationTime,
+    likeCount,
+    categories,
+  } = data;
   return (
     <RecipeCardBase size={size}>
       <SaveButton onClick={() => console.log("asd")}>
         <FaHeart size={18} />
       </SaveButton>
       <RecipeCardImage size={size}>
-        <a href="#">
-          <img src="https://www.alerjify.com/images/recipes/resim4.jpg" />
+        <a href={getRecipeDetailUrl(slug)}>
+          <img src={prepareImageUrl(recipeImages?.data?.attributes?.url)} />
         </a>
       </RecipeCardImage>
       <RecipeCardInfo>
-        <RecipeCardInfoCategory>Tatlı</RecipeCardInfoCategory>
+        <RecipeCardInfoCategory
+          href={getCategoryUrl(categories?.data[0].attributes?.categorySlug)}
+        >
+          {categories?.data[0].attributes?.categoryTitle}
+        </RecipeCardInfoCategory>
         <RecipeCardInfoTitle>
-          <a href="#">Glutensiz Çikolatalı Brownie</a>
+          <a href={getRecipeDetailUrl(slug)}>{recipeTitle}</a>
         </RecipeCardInfoTitle>
         <RecipeCardInfoDescription>
-          Fırını önceden 200 ° C'ye ısıtın. Kare veya yuvarlak tavayı yağlayın;
-          ya en az 2" derinlikte olmalıdır.Şeker, tereyağı ve tuzu mikroda...
+          {recipeDescription?.substring(0, 100)}...
         </RecipeCardInfoDescription>
-        <RecipeMetas author="Mert" time="20 dk" likes="20" />
+        <RecipeMetas
+          author="Mert"
+          time={`${preparationTime} dk`}
+          likes={likeCount?.toString() ?? "0"}
+        />
       </RecipeCardInfo>
     </RecipeCardBase>
   );

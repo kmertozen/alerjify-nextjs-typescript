@@ -27,6 +27,7 @@ export const SaveButton = styled.div`
 
 export const RecipeCardBase = styled.div<{ size: string }>`
   position: relative;
+  width: ${(props) => cardSizeMap[props.size as keyof typeof cardSizeMap]};
   max-width: ${(props) => cardSizeMap[props.size as keyof typeof cardSizeMap]};
   padding: 0 16px;
   &:hover {

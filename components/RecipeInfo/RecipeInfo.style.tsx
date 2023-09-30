@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const RecipeContainer = styled.div`
-  max-width: 70%;
+  width: 70%;
   padding: 16px;
 `;
 export const RecipeMetas = styled.div`
@@ -27,6 +27,8 @@ export const TitleWrapper = styled.div`
 export const RecipeImageWrapper = styled.div`
   img {
     width: 100%;
+    max-height: 400px;
+    object-fit: cover;
     border-radius: 8px;
   }
 `;
@@ -60,6 +62,10 @@ export const InfoDescription = styled.div`
   font-size: 16px;
 `;
 
+export const RecipeDescription = styled.div`
+  line-height: 24px;
+  margin-bottom: 24px;
+`;
 export const IngredientsWrapper = styled.div`
   width: 50%;
   background-color: #f2f2f2;
@@ -79,7 +85,7 @@ export const IngredientCheck = styled.label`
   align-items: center;
   gap: 10px;
   position: relative;
-  font-size: 18px;
+  font-size: 16px;
   input[type="checkbox"] {
     width: 20px;
     height: 20px;
@@ -136,14 +142,43 @@ export const Tags = styled.p`
     cursor: default;
   }
   a {
-    display: block;
-    padding: 8px 16px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding: 6px 16px;
     margin: 0.5em;
-    text-transform: uppercase;
     border-radius: 3px;
     background-color: #f2f2f2;
+    font-size: 14px;
+    font-weight: 700;
     color: #919191;
     transition: transform 0.2s;
     transition-timing-function: cubic-bezier(0.45, -0.85, 0.55, -0.45);
+    &::before {
+      content: "";
+      float: left;
+      position: absolute;
+      top: 0;
+      left: -18px;
+      width: 0;
+      height: 0;
+      border-color: transparent #f2f2f2 transparent transparent;
+      border-style: solid;
+      border-width: 15px 20px 15px 0;
+      transition: all ease-in-out 0.2s;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 0;
+      float: left;
+      width: 6px;
+      height: 6px;
+      border-radius: 3px;
+      background: #fff;
+    }
   }
 `;

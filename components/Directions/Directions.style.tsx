@@ -11,7 +11,7 @@ export const DirectionWrapper = styled.div`
   gap: 30px;
 `;
 export const StepWrapper = styled.div`
-  width: 30%;
+  width: 10%;
 `;
 export const Step = styled.div`
   position: relative;
@@ -37,6 +37,7 @@ export const Step = styled.div`
   }
 `;
 export const Description = styled.div`
+  width: 90%;
   line-height: 24px;
 `;
 export const StepImage = styled.div`

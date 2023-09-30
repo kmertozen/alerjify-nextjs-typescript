@@ -3,17 +3,20 @@ import { TrendList, TrendsBase } from "./Trends.style";
 import React from "react";
 import RecipeCard from "../RecipeCard/RecipeCard";
 import SectionTitle from "../SectionTitle/SectionTitle";
+import { Recipe } from "@/generated/graphql";
 
-export default function Trends() {
+export default function Trends({ trends }: { trends: Recipe[] }) {
   return (
     <TrendsBase>
-      <SectionTitle title="En Yeni Tarifler" />
+      <SectionTitle title="En Popüler Tarifler" />
       <TrendList>
-        <RecipeCard size="large" />
-        <RecipeCard size="medium" />
-        <RecipeCard size="medium" />
-        <RecipeCard size="medium" />
-        <RecipeCard size="medium" />
+        {trends.map((trend, index) => (
+          <RecipeCard
+            key={index}
+            size={index === 0 ? "large" : "medium"}
+            data={trend}
+          />
+        ))}
       </TrendList>
     </TrendsBase>
   );

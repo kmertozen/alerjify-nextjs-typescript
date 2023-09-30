@@ -20,7 +20,7 @@ const Rating = ({
       <RatingStarsWrapper>
         {Array.from({ length: count }, (_, i) => {
           return (
-            <StarWrapper isEmpty={!(value > i)}>
+            <StarWrapper key={i} isEmpty={!(value > i)}>
               <FaStar size={22} />
             </StarWrapper>
           );

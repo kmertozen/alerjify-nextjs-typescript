@@ -1,8 +1,8 @@
 import { styled } from "styled-components";
 
 export const TrendsBase = styled.div`
-  width: 66.666667%;
-  padding: 16px;
+  width: 70%;
+  padding: 16px 0;
 `;
 export const TrendList = styled.div`
   display: flex;
