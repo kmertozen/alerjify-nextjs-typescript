@@ -6,6 +6,7 @@ import Layout from "@/components/Layout/Layout";
 import Head from "next/head";
 import dayjs from "dayjs";
 import "dayjs/locale/tr";
+import Script from "next/script";
 export default function App({ Component, pageProps }: AppProps) {
   dayjs.locale("tr");
   return (
@@ -16,6 +17,21 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta
           name="keywords"
           content="Alerji, Yemek, Yemek Tarifleri, Nefis Yemek Tarifleri, Gıda Hassasiyeti, Gıda, Hassasiyet, Tarifler, Diyet, Diyet Çeşitleri"
+        />
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-BZ7FPPDRD2"
+        />
+        <Script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+		function gtag() {
+				dataLayer.push(arguments);
+			}
+		gtag('js', new Date());
+
+		gtag('config', 'G-BZ7FPPDRD2');`,
+          }}
         />
       </Head>
       <Header />

@@ -2,14 +2,8 @@ import { HeaderContainer, Navbar } from "./Header.style";
 
 import Link from "next/link";
 import React from "react";
-import { useRouter } from "next/router";
 
 function Header() {
-  const router = useRouter();
-  const handleSearch = (e: any) => {
-    e.preventDefault();
-    router.push(`/ara?s=${e.target[0].value}`);
-  };
   return (
     <>
       <HeaderContainer>
@@ -18,7 +12,7 @@ function Header() {
             width="200"
             className="py-2"
             alt="Alerjify"
-            src="https://www.alerjify.com/images/logo.png"
+            src="/alerjify.svg"
           />
         </Link>
       </HeaderContainer>
