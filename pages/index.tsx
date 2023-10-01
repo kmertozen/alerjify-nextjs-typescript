@@ -20,14 +20,12 @@ import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 
 export default function Home({
-  recipes,
   interests,
   slider,
   recipeCards,
   trends,
   latest,
 }: {
-  recipes: Recipe[];
   interests: Recipe[];
   slider: Recipe[];
   recipeCards: Recipe[];
@@ -59,18 +57,15 @@ export default function Home({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const [recipes, interests, slider, recipeCards, trends, latest] =
-    await Promise.all([
-      getRecipesData(),
-      getLatestRecipesData(5),
-      getHomepageSlidersData(),
-      getHomepageRecipeCardsData(),
-      getTrendsData(5),
-      getLatestRecipesData(6),
-    ]);
+  const [interests, slider, recipeCards, trends, latest] = await Promise.all([
+    getLatestRecipesData(5),
+    getHomepageSlidersData(),
+    getHomepageRecipeCardsData(),
+    getTrendsData(5),
+    getLatestRecipesData(6),
+  ]);
   return {
     props: {
-      recipes,
       interests,
       slider,
       recipeCards,
