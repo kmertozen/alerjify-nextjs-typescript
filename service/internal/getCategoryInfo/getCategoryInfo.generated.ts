@@ -1681,97 +1681,36 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
-export type GetLatestRecipesQueryVariables = Types.Exact<{
-  tag?: Types.InputMaybe<Types.Scalars['String']['input']>;
+export type GetCategoryInfoQueryVariables = Types.Exact<{
   category?: Types.InputMaybe<Types.Scalars['String']['input']>;
-  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  page?: Types.InputMaybe<Types.Scalars['Int']['input']>;
-  pageSize?: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 
-export type GetLatestRecipesQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', slug: string, recipeTitle: string, recipeDescription?: string | null, personCount?: string | null, preparationTime?: string | null, cookingTime?: string | null, likeCount?: number | null, updatedAt?: any | null, recipeDirections?: { __typename?: 'ComponentRecipeDirections', id: string, direction?: Array<{ __typename?: 'ComponentRecipeDirection', id: string, text?: string | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null> | null } | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, ingredients: Array<{ __typename?: 'ComponentRecipeIngredient', amount?: string | null, ingredient?: { __typename?: 'IngredientEntityResponse', data?: { __typename?: 'IngredientEntity', attributes?: { __typename?: 'Ingredient', ingredient_name?: string | null } | null } | null } | null } | null>, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', tag_name: string, slug: string } | null }> } | null } | null }> } | null };
+export type GetCategoryInfoQuery = { __typename?: 'Query', categories?: { __typename?: 'CategoryEntityResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null };
 
 
-export const GetLatestRecipesDocument = `
-    query getLatestRecipes($tag: String, $category: String, $limit: Int, $page: Int, $pageSize: Int) {
-  recipes(
-    filters: {categories: {categorySlug: {eq: $category}}, tags: {slug: {eq: $tag}}}
-    pagination: {limit: $limit, page: $page, pageSize: $pageSize}
-    sort: "createdAt:desc"
-  ) {
+export const GetCategoryInfoDocument = `
+    query getCategoryInfo($category: String) {
+  categories(filters: {categorySlug: {eq: $category}}) {
     data {
       attributes {
-        slug
-        recipeTitle
-        recipeDescription
-        recipeDirections {
-          id
-          direction {
-            id
-            text
-            image {
-              data {
-                attributes {
-                  url
-                }
-              }
-            }
-          }
-        }
-        recipeImages {
-          data {
-            attributes {
-              url
-            }
-          }
-        }
-        personCount
-        preparationTime
-        cookingTime
-        ingredients {
-          amount
-          ingredient {
-            data {
-              attributes {
-                ingredient_name
-              }
-            }
-          }
-        }
-        categories {
-          data {
-            attributes {
-              categoryTitle
-              categorySlug
-            }
-          }
-        }
-        tags {
-          data {
-            attributes {
-              tag_name
-              slug
-            }
-          }
-        }
-        likeCount
-        updatedAt
+        categoryTitle
+        categorySlug
       }
     }
   }
 }
     `;
-export const useGetLatestRecipesQuery = <
-      TData = GetLatestRecipesQuery,
+export const useGetCategoryInfoQuery = <
+      TData = GetCategoryInfoQuery,
       TError = unknown
     >(
       dataSource: { endpoint: string, fetchParams?: RequestInit },
-      variables?: GetLatestRecipesQueryVariables,
-      options?: UseQueryOptions<GetLatestRecipesQuery, TError, TData>
+      variables?: GetCategoryInfoQueryVariables,
+      options?: UseQueryOptions<GetCategoryInfoQuery, TError, TData>
     ) =>
-    useQuery<GetLatestRecipesQuery, TError, TData>(
-      variables === undefined ? ['getLatestRecipes'] : ['getLatestRecipes', variables],
-      fetcher<GetLatestRecipesQuery, GetLatestRecipesQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetLatestRecipesDocument, variables),
+    useQuery<GetCategoryInfoQuery, TError, TData>(
+      variables === undefined ? ['getCategoryInfo'] : ['getCategoryInfo', variables],
+      fetcher<GetCategoryInfoQuery, GetCategoryInfoQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetCategoryInfoDocument, variables),
       options
     );

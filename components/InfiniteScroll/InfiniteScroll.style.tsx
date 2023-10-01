@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LatestRecipesBase = styled.div`
+export const InfiniteScrollBase = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;

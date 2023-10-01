@@ -1,5 +1,15 @@
-query getLatestRecipes($limit: Int, $page: Int, $pageSize: Int) {
+query getLatestRecipes(
+  $tag: String
+  $category: String
+  $limit: Int
+  $page: Int
+  $pageSize: Int
+) {
   recipes(
+    filters: {
+      categories: { categorySlug: { eq: $category } }
+      tags: { slug: { eq: $tag } }
+    }
     pagination: { limit: $limit, page: $page, pageSize: $pageSize }
     sort: "createdAt:desc"
   ) {

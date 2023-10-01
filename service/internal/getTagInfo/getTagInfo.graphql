@@ -1,0 +1,10 @@
+query getTagInfo($tag: String) {
+  tags(filters: { slug: { eq: $tag } }) {
+    data {
+      attributes {
+        tag_name
+        slug
+      }
+    }
+  }
+}

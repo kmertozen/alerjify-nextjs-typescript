@@ -1,11 +1,18 @@
 import { Recipe } from "@/generated/graphql";
 import React, { useEffect, useRef, useState } from "react";
 import RecipeCard from "../RecipeCard/RecipeCard";
-import { getLatestRecipesData } from "@/service/internal/getLatestRecipes/getLatestRecipes";
 import axios from "axios";
-import { LatestRecipesBase } from "./LatestRecipes.style";
+import { InfiniteScrollBase } from "./InfiniteScroll.style";
 
-const LatestRecipes = ({ initialRecipes }: { initialRecipes: Recipe[] }) => {
+const InfiniteScroll = ({
+  initialRecipes,
+  tag,
+  category,
+}: {
+  initialRecipes: Recipe[];
+  tag?: string;
+  category?: string;
+}) => {
   const [recipes, setRecipes] = useState(initialRecipes);
   const [page, setPage] = useState(2);
   const [hasMore, setHasMore] = useState(true);
@@ -16,7 +23,7 @@ const LatestRecipes = ({ initialRecipes }: { initialRecipes: Recipe[] }) => {
     if (firstEntry.isIntersecting && hasMore) {
       const more = (
         await axios.get("/api/recent/", {
-          params: { page, pageSize: 6 },
+          params: { page, pageSize: 6, tag, category },
         })
       ).data;
 
@@ -41,14 +48,14 @@ const LatestRecipes = ({ initialRecipes }: { initialRecipes: Recipe[] }) => {
   }, [recipes]);
 
   return (
-    <LatestRecipesBase>
+    <InfiniteScrollBase>
       {initialRecipes &&
         recipes.map((recipe, index) => (
           <RecipeCard key={index} size="small" data={recipe} />
         ))}
       <div ref={elementRef} />
-    </LatestRecipesBase>
+    </InfiniteScrollBase>
   );
 };
 
-export default LatestRecipes;
+export default InfiniteScroll;

@@ -10,13 +10,15 @@ import {
 export const getLatestRecipesData = async (
   limit?: number,
   page?: number,
-  pageSize?: number
+  pageSize?: number,
+  category?: string,
+  tag?: string
 ) => {
   const { data } = await client.query<GetLatestRecipesQuery>({
     query: gql`
       ${GetLatestRecipesDocument}
     `,
-    variables: { limit, page, pageSize },
+    variables: { limit, page, pageSize, category, tag },
   });
   const parseData = (
     data: GetLatestRecipesQuery

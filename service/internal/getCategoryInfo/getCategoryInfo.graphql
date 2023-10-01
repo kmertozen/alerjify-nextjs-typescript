@@ -1,0 +1,10 @@
+query getCategoryInfo($category: String) {
+  categories(filters: { categorySlug: { eq: $category } }) {
+    data {
+      attributes {
+        categoryTitle
+        categorySlug
+      }
+    }
+  }
+}
