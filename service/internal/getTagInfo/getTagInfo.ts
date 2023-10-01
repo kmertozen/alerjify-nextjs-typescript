@@ -7,12 +7,12 @@ import {
   Tag,
 } from "./getTagInfo.generated";
 
-export const getTagInfoData = async (slug?: string) => {
+export const getTagInfoData = async (tag?: string) => {
   const { data } = await client.query<GetTagInfoQuery>({
     query: gql`
       ${GetTagInfoDocument}
     `,
-    variables: { slug },
+    variables: { tag },
   });
   const parseData = (data: GetTagInfoQuery): Maybe<Tag> | undefined => {
     if (data.tags?.data && data.tags?.data.length > 0) {

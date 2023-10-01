@@ -7,12 +7,12 @@ import {
   Maybe,
 } from "./getCategoryInfo.generated";
 
-export const getCategoryInfoData = async (slug?: string) => {
+export const getCategoryInfoData = async (category?: string) => {
   const { data } = await client.query<GetCategoryInfoQuery>({
     query: gql`
       ${GetCategoryInfoDocument}
     `,
-    variables: { slug },
+    variables: { category },
   });
   const parseData = (
     data: GetCategoryInfoQuery

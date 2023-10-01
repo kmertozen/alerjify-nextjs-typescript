@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     getCategoryInfoData(categorySlug),
     getLatestRecipesData(6, undefined, undefined, categorySlug),
   ]);
-  console.log(recipes);
+
   if (recipes)
     return {
       props: {
