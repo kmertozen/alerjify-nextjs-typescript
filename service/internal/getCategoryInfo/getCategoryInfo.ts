@@ -20,6 +20,7 @@ export const getCategoryInfoData = async (slug?: string) => {
     if (data.categories?.data && data.categories?.data.length > 0) {
       return data?.categories?.data?.map((r) => r.attributes)[0] as Category;
     }
+    return null;
   };
   return parseData(data);
 };

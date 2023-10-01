@@ -26,6 +26,7 @@ export const getLatestRecipesData = async (
     if (data.recipes && data.recipes?.data.length > 0) {
       return data.recipes.data.map((r) => r.attributes) as Recipe[];
     }
+    return null;
   };
   return parseData(data);
 };

@@ -18,6 +18,7 @@ export const getRecipesBySlugData = async (slug?: string) => {
     if (data.recipes && data.recipes?.data.length > 0) {
       return data.recipes.data.map((r) => r.attributes)[0] as Recipe;
     }
+    return null;
   };
   return parseData(data);
 };

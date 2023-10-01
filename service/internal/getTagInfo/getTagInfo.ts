@@ -18,6 +18,7 @@ export const getTagInfoData = async (slug?: string) => {
     if (data.tags?.data && data.tags?.data.length > 0) {
       return data?.tags?.data?.map((r) => r.attributes)[0] as Tag;
     }
+    return null;
   };
   return parseData(data);
 };
