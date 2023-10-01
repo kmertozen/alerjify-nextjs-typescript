@@ -60,7 +60,7 @@ ${normalize}
   
   .SliderContainer:hover {
     ${HeroCard}{
-      top: 260px;
+      top: 270px;
     }
     .navigator-left, .navigator-right {
       opacity: 1;

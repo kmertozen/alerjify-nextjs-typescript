@@ -38,18 +38,21 @@ export default function RecipeCard({
         <FaHeart size={18} />
       </SaveButton>
       <RecipeCardImage size={size}>
-        <a href={getRecipeDetailUrl(slug)}>
+        <a href={getRecipeDetailUrl(slug)} title={recipeTitle}>
           <img src={prepareImageUrl(recipeImages?.data?.attributes?.url)} />
         </a>
       </RecipeCardImage>
       <RecipeCardInfo>
         <RecipeCardInfoCategory
+          title={categories?.data[0].attributes?.categoryTitle}
           href={getCategoryUrl(categories?.data[0].attributes?.categorySlug)}
         >
           {categories?.data[0].attributes?.categoryTitle}
         </RecipeCardInfoCategory>
         <RecipeCardInfoTitle>
-          <a href={getRecipeDetailUrl(slug)}>{recipeTitle}</a>
+          <a href={getRecipeDetailUrl(slug)} title={recipeTitle}>
+            {recipeTitle}
+          </a>
         </RecipeCardInfoTitle>
         <RecipeCardInfoDescription>
           {recipeDescription?.substring(0, 100)}...

@@ -66,7 +66,7 @@ const Carousel = ({ slides }: { slides: Recipe[] }) => {
                 index
               ) => (
                 <HeroSlider key={index}>
-                  <a href={getRecipeDetailUrl(slug)}>
+                  <a href={getRecipeDetailUrl(slug)} title={recipeTitle}>
                     <img
                       src={prepareImageUrl(recipeImages?.data?.attributes?.url)}
                       alt={recipeTitle}

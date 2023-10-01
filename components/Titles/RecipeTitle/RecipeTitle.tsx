@@ -10,7 +10,9 @@ const RecipeTitle = ({
 }) => {
   return (
     <RecipeTitleBase>
-      <a href={href}>{children}</a>
+      <a href={href} title={children as string}>
+        {children}
+      </a>
     </RecipeTitleBase>
   );
 };

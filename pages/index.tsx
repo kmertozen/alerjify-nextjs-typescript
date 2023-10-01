@@ -1,7 +1,7 @@
 import CardList from "@/components/CardList/CardList";
 import Carousel from "@/components/Carousel/Carousel";
 import Interests from "@/components/Interests/Interests";
-import LatestRecipes from "@/components/LatestRecipes/LatestRecipes";
+import LatestRecipes from "@/components/InfiniteScroll/InfiniteScroll";
 import LayoutSectionContainer from "@/components/LayoutSectionContainer/LayoutSectionContainer";
 import RecipeCard from "@/components/RecipeCard/RecipeCard";
 import RecipeCardMini from "@/components/RecipeCardMini/RecipeCardMini";
@@ -15,6 +15,7 @@ import { getHomepageSlidersData } from "@/service/internal/getHomepageSliders/ge
 import { getLatestRecipesData } from "@/service/internal/getLatestRecipes/getLatestRecipes";
 import { getRecipesData } from "@/service/internal/getRecipes/getRecipes";
 import { getTrendsData } from "@/service/internal/getTrends/getTrends";
+import { defaultMeta } from "@/utils/default";
 import { GetServerSideProps } from "next";
 import { useEffect } from "react";
 
@@ -67,5 +68,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       getTrendsData(5),
       getLatestRecipesData(6),
     ]);
-  return { props: { recipes, interests, slider, recipeCards, trends, latest } };
+  return {
+    props: {
+      recipes,
+      interests,
+      slider,
+      recipeCards,
+      trends,
+      latest,
+      meta: defaultMeta,
+    },
+  };
 };

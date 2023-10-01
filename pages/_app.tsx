@@ -13,6 +13,10 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>{pageProps?.meta?.title}</title>
         <meta name="description" content={pageProps?.meta?.description} />
+        <meta
+          name="keywords"
+          content="Alerji, Yemek, Yemek Tarifleri, Nefis Yemek Tarifleri, Gıda Hassasiyeti, Gıda, Hassasiyet, Tarifler, Diyet, Diyet Çeşitleri"
+        />
       </Head>
       <Header />
       <Layout>

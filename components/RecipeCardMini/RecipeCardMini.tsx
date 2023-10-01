@@ -19,18 +19,21 @@ export default function RecipeCardMini({ data }: { data: Recipe }) {
   return (
     <RecipeCardMiniBase>
       <RecipeCardMiniImage>
-        <a href={getRecipeDetailUrl(slug)}>
+        <a href={getRecipeDetailUrl(slug)} title={recipeTitle}>
           <img src={prepareImageUrl(recipeImages?.data?.attributes?.url)} />
         </a>
       </RecipeCardMiniImage>
       <RecipeCardMiniInfo>
         <RecipeCardMiniInfoCategory
+          title={categories?.data[0].attributes?.categoryTitle}
           href={getCategoryUrl(categories?.data[0].attributes?.categorySlug)}
         >
           {categories?.data[0].attributes?.categoryTitle}
         </RecipeCardMiniInfoCategory>
         <RecipeCardMiniInfoTitle>
-          <a href={getRecipeDetailUrl(slug)}>{recipeTitle}</a>
+          <a href={getRecipeDetailUrl(slug)} title={recipeTitle}>
+            {recipeTitle}
+          </a>
         </RecipeCardMiniInfoTitle>
         <RecipeCardMiniInfoStats>
           <div>

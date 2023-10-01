@@ -1,5 +1,5 @@
 import Interests from "@/components/Interests/Interests";
-import LatestRecipes from "@/components/LatestRecipes/LatestRecipes";
+import LatestRecipes from "@/components/InfiniteScroll/InfiniteScroll";
 import LayoutSectionContainer from "@/components/LayoutSectionContainer/LayoutSectionContainer";
 import RecipeInfo from "@/components/RecipeInfo/RecipeInfo";
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
@@ -54,8 +54,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
         similarRecipes,
         latest,
         meta: {
-          title: recipe.recipeTitle,
-          description: recipe.recipeDescription,
+          title: `${recipe.recipeTitle} Tarifi Nasıl Yapılır? | Alerjify`,
+          description: `${recipe.recipeDescription} tarifi, Gıda hassasiyetlerine uygun leziz tarifler, Alerjify'de!`,
         },
       },
     };

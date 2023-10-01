@@ -8,7 +8,11 @@ const CategoryTitle = ({
   children: React.ReactNode;
   href: string;
 }) => {
-  return <CategoryTitleBase href={href}>{children}</CategoryTitleBase>;
+  return (
+    <CategoryTitleBase href={href} title={children as string}>
+      {children}
+    </CategoryTitleBase>
+  );
 };
 
 export default CategoryTitle;

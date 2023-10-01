@@ -32,6 +32,7 @@ import { Recipe } from "@/generated/graphql";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { prepareImageUrl } from "@/utils/image";
+import { getTagUrl } from "@/utils/url";
 
 const RecipeInfo = ({ recipe }: { recipe: Recipe }) => {
   const {
@@ -139,7 +140,11 @@ const RecipeInfo = ({ recipe }: { recipe: Recipe }) => {
         <Tags>
           <span>TAGS</span>
           {tags?.data.map((tag, i) => (
-            <a href="#" key={i}>
+            <a
+              title={tag.attributes?.tag_name}
+              href={getTagUrl(tag.attributes?.slug)}
+              key={i}
+            >
               {tag.attributes?.tag_name}
             </a>
           ))}
