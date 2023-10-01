@@ -1658,6 +1658,13 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
+export type GetCategoryInfoQueryVariables = Exact<{
+  category?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetCategoryInfoQuery = { __typename?: 'Query', categories?: { __typename?: 'CategoryEntityResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null };
+
 export type GetHomepageRecipeCardsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1669,6 +1676,8 @@ export type GetHomepageSlidersQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetHomepageSlidersQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', attributes?: { __typename?: 'Homepage', slider?: { __typename?: 'ComponentComponentsSlider', recipes?: { __typename?: 'RecipeRelationResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeTitle: string, slug: string, recipeDescription?: string | null, preparationTime?: string | null, likeCount?: number | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null } | null }> } | null } | null } | null } | null } | null };
 
 export type GetLatestRecipesQueryVariables = Exact<{
+  tag?: InputMaybe<Scalars['String']['input']>;
+  category?: InputMaybe<Scalars['String']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
@@ -1697,6 +1706,13 @@ export type GetSimilarRecipesByCategoryQueryVariables = Exact<{
 
 
 export type GetSimilarRecipesByCategoryQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeTitle: string, slug: string, updatedAt?: any | null, likeCount?: number | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null } | null }> } | null };
+
+export type GetTagInfoQueryVariables = Exact<{
+  tag?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetTagInfoQuery = { __typename?: 'Query', tags?: { __typename?: 'TagEntityResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', tag_name: string, slug: string } | null }> } | null };
 
 export type GetTrendsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
