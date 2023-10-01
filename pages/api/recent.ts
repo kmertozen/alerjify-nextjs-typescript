@@ -6,7 +6,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { limit, page, pageSize } = req.query;
-  const data = await getLatestRecipesData(+limit!, +page!, +pageSize!);
+  const { limit, page, pageSize, category, tag } = req.query;
+  const data = await getLatestRecipesData(
+    +limit!,
+    +page!,
+    +pageSize!,
+    category as string,
+    tag as string
+  );
   res.status(200).json(data);
 }
