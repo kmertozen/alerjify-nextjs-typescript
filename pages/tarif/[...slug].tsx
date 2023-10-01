@@ -49,6 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     recipe?.categories?.data[0].attributes?.categorySlug,
     5
   );
+  console.log(recipe);
   if (recipe)
     return {
       props: {
