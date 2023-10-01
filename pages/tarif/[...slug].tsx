@@ -25,10 +25,12 @@ function Tarif({
         <RecipeInfo recipe={recipe} />
         <Interests interests={similarRecipes} />
       </LayoutSectionContainer>
-      <LayoutSectionContainer>
-        <SectionTitle title="Diğer Lezzetli Tarifler" />
-        <LatestRecipes initialRecipes={latest} />
-      </LayoutSectionContainer>
+      {similarRecipes && (
+        <LayoutSectionContainer>
+          <SectionTitle title="Diğer Lezzetli Tarifler" />
+          <LatestRecipes initialRecipes={latest} />
+        </LayoutSectionContainer>
+      )}
     </>
   );
 }
@@ -47,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     recipe?.categories?.data[0].attributes?.categorySlug,
     5
   );
-  if (recipe && similarRecipes)
+  if (recipe)
     return {
       props: {
         recipe,
