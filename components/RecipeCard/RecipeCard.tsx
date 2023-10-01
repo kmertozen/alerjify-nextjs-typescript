@@ -55,7 +55,7 @@ export default function RecipeCard({
           </a>
         </RecipeCardInfoTitle>
         <RecipeCardInfoDescription>
-          {recipeDescription?.substring(0, 100)}...
+          {recipeDescription?.substring(0, 140)}...
         </RecipeCardInfoDescription>
         <RecipeMetas
           author="Mert"

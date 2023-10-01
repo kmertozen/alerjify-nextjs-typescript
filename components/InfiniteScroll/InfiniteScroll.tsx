@@ -27,7 +27,7 @@ const InfiniteScroll = ({
         })
       ).data;
 
-      if (more.length === 0) setHasMore(false);
+      if (!more) setHasMore(false);
       else {
         setPage((prev) => prev + 1);
         setRecipes((prev) => [...prev, ...more]);

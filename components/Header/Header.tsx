@@ -1,27 +1,26 @@
 import { HeaderContainer, Navbar } from "./Header.style";
 
-import Link from "next/link";
 import React from "react";
 
 function Header() {
   return (
     <>
       <HeaderContainer>
-        <Link href="/">
+        <a href="/">
           <img
             width="200"
             className="py-2"
             alt="Alerjify"
             src="/alerjify.svg"
           />
-        </Link>
+        </a>
       </HeaderContainer>
       <Navbar>
-        <Link href="/">Ana Sayfa</Link>
-        <Link href="/tarifler">Tarifler</Link>
-        <Link href="#">Diyetler</Link>
-        <Link href="#">Alerjiler</Link>
-        <Link href="#">Blog</Link>
+        <a href="/">Ana Sayfa</a>
+        <a href="/tarifler">Tarifler</a>
+        <a href="#">Diyetler</a>
+        <a href="#">Alerjiler</a>
+        <a href="#">Blog</a>
       </Navbar>
     </>
   );
