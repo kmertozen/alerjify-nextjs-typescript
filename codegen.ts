@@ -3,7 +3,7 @@ import { loadEnvConfig } from "@next/env";
 loadEnvConfig(process.cwd());
 const config: CodegenConfig = {
   schema: process.env.NEXT_GRAPHQL_ENDPOINT,
-  documents: ["service/internal/**/*.graphql"],
+  documents: ["service/**/**/*.graphql"],
   generates: {
     "generated/graphql.ts": {
       plugins: ["typescript", "typescript-operations"],

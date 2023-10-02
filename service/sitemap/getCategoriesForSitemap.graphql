@@ -1,0 +1,9 @@
+query getCategoriesForSitemap {
+  categories {
+    data {
+      attributes {
+        categorySlug
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+query getTagsForSitemap {
+  tags {
+    data {
+      attributes {
+        slug
+      }
+    }
+  }
+}

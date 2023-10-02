@@ -1,3 +1,6 @@
+import * as Types from '../../generated/graphql';
+
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -5,6 +8,26 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+
+function fetcher<TData, TVariables>(endpoint: string, requestInit: RequestInit, query: string, variables?: TVariables) {
+  return async (): Promise<TData> => {
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      ...requestInit,
+      body: JSON.stringify({ query, variables }),
+    });
+
+    const json = await res.json();
+
+    if (json.errors) {
+      const { message } = json.errors[0];
+
+      throw new Error(message);
+    }
+
+    return json.data;
+  }
+}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -1658,80 +1681,33 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
-export type GetCategoryInfoQueryVariables = Exact<{
-  category?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type GetCategoryInfoQuery = { __typename?: 'Query', categories?: { __typename?: 'CategoryEntityResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null };
-
-export type GetHomepageRecipeCardsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetHomepageRecipeCardsQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', attributes?: { __typename?: 'Homepage', recipeCards?: { __typename?: 'ComponentComponentsRecipeCards', recipes?: { __typename?: 'RecipeRelationResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeTitle: string, slug: string, recipeDescription?: string | null, preparationTime?: string | null, likeCount?: number | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null } | null }> } | null } | null } | null } | null } | null };
-
-export type GetHomepageSlidersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetHomepageSlidersQuery = { __typename?: 'Query', homepage?: { __typename?: 'HomepageEntityResponse', data?: { __typename?: 'HomepageEntity', attributes?: { __typename?: 'Homepage', slider?: { __typename?: 'ComponentComponentsSlider', recipes?: { __typename?: 'RecipeRelationResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeTitle: string, slug: string, recipeDescription?: string | null, preparationTime?: string | null, likeCount?: number | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null } | null }> } | null } | null } | null } | null } | null };
-
-export type GetLatestRecipesQueryVariables = Exact<{
-  tag?: InputMaybe<Scalars['String']['input']>;
-  category?: InputMaybe<Scalars['String']['input']>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-
-export type GetLatestRecipesQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', slug: string, recipeTitle: string, recipeDescription?: string | null, personCount?: string | null, preparationTime?: string | null, cookingTime?: string | null, likeCount?: number | null, updatedAt?: any | null, recipeDirections?: { __typename?: 'ComponentRecipeDirections', id: string, direction?: Array<{ __typename?: 'ComponentRecipeDirection', id: string, text?: string | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null> | null } | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, ingredients: Array<{ __typename?: 'ComponentRecipeIngredient', amount?: string | null, ingredient?: { __typename?: 'IngredientEntityResponse', data?: { __typename?: 'IngredientEntity', attributes?: { __typename?: 'Ingredient', ingredient_name?: string | null } | null } | null } | null } | null>, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', tag_name: string, slug: string } | null }> } | null } | null }> } | null };
-
-export type GetRecipeBySlugQueryVariables = Exact<{
-  slug?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type GetRecipeBySlugQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', slug: string, recipeTitle: string, recipeDescription?: string | null, personCount?: string | null, preparationTime?: string | null, cookingTime?: string | null, likeCount?: number | null, updatedAt?: any | null, recipeDirections?: { __typename?: 'ComponentRecipeDirections', id: string, direction?: Array<{ __typename?: 'ComponentRecipeDirection', id: string, text?: string | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null> | null } | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, ingredients: Array<{ __typename?: 'ComponentRecipeIngredient', amount?: string | null, ingredient?: { __typename?: 'IngredientEntityResponse', data?: { __typename?: 'IngredientEntity', attributes?: { __typename?: 'Ingredient', ingredient_name?: string | null } | null } | null } | null } | null>, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', tag_name: string, slug: string } | null }> } | null } | null }> } | null };
-
-export type GetRecipesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetRecipesQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeTitle: string } | null }> } | null };
-
-export type GetSimilarRecipesByCategoryQueryVariables = Exact<{
-  recipeSlug?: InputMaybe<Scalars['String']['input']>;
-  categorySlug?: InputMaybe<Scalars['String']['input']>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-
-export type GetSimilarRecipesByCategoryQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeTitle: string, slug: string, updatedAt?: any | null, likeCount?: number | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null } | null }> } | null };
-
-export type GetTagInfoQueryVariables = Exact<{
-  tag?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type GetTagInfoQuery = { __typename?: 'Query', tags?: { __typename?: 'TagEntityResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', tag_name: string, slug: string } | null }> } | null };
-
-export type GetTrendsQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-
-export type GetTrendsQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeTitle: string, slug: string, recipeDescription?: string | null, preparationTime?: string | null, likeCount?: number | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null } | null }> } | null };
-
-export type GetCategoriesForSitemapQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetCategoriesForSitemapQuery = { __typename?: 'Query', categories?: { __typename?: 'CategoryEntityResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categorySlug: string } | null }> } | null };
-
-export type GetRecipesForSitemapQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetRecipesForSitemapQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
 export type GetRecipesForSitemapQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', slug: string } | null }> } | null };
 
-export type GetTagsForSitemapQueryVariables = Exact<{ [key: string]: never; }>;
 
-
-export type GetTagsForSitemapQuery = { __typename?: 'Query', tags?: { __typename?: 'TagEntityResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', slug: string } | null }> } | null };
+export const GetRecipesForSitemapDocument = `
+    query getRecipesForSitemap {
+  recipes {
+    data {
+      attributes {
+        slug
+      }
+    }
+  }
+}
+    `;
+export const useGetRecipesForSitemapQuery = <
+      TData = GetRecipesForSitemapQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables?: GetRecipesForSitemapQueryVariables,
+      options?: UseQueryOptions<GetRecipesForSitemapQuery, TError, TData>
+    ) =>
+    useQuery<GetRecipesForSitemapQuery, TError, TData>(
+      variables === undefined ? ['getRecipesForSitemap'] : ['getRecipesForSitemap', variables],
+      fetcher<GetRecipesForSitemapQuery, GetRecipesForSitemapQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetRecipesForSitemapDocument, variables),
+      options
+    );

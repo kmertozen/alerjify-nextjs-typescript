@@ -57,13 +57,13 @@ export default function Home({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const [interests, slider, recipeCards, trends, latest] = await Promise.all([
-    getLatestRecipesData(5),
+  const [slider, recipeCards, trends, latest] = await Promise.all([
     getHomepageSlidersData(),
     getHomepageRecipeCardsData(),
     getTrendsData(5),
     getLatestRecipesData(6),
   ]);
+  const interests = latest?.filter((recipe, index) => index < 5);
   return {
     props: {
       interests,

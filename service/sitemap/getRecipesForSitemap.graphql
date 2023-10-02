@@ -1,0 +1,9 @@
+query getRecipesForSitemap {
+  recipes {
+    data {
+      attributes {
+        slug
+      }
+    }
+  }
+}
