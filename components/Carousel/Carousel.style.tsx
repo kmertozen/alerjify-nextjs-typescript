@@ -78,7 +78,7 @@ export const HeroCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  top: 375px;
+  top: 370px;
   background-color: #fff;
   padding: 24px 16px;
   margin: 0 auto;
@@ -98,6 +98,7 @@ export const HeroCard = styled.div`
   p {
     margin-bottom: 20px;
     line-height: 24px;
+    height: 48px;
   }
   @media (max-width: 768px) {
     position: initial;
