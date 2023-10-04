@@ -18,6 +18,11 @@ export default function App({ Component, pageProps }: AppProps) {
           name="keywords"
           content="Alerji, Yemek, Yemek Tarifleri, Nefis Yemek Tarifleri, Gıda Hassasiyeti, Gıda, Hassasiyet, Tarifler, Diyet, Diyet Çeşitleri"
         />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5361129984468141"
+          crossOrigin="anonymous"
+        ></script>
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-BZ7FPPDRD2"
