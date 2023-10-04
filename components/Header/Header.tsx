@@ -1,8 +1,11 @@
+import { useRouter } from "next/router";
 import { HeaderContainer, Navbar } from "./Header.style";
 
 import React from "react";
 
 function Header() {
+  const router = useRouter();
+  console.log(router);
   return (
     <>
       <HeaderContainer>
@@ -16,8 +19,15 @@ function Header() {
         </a>
       </HeaderContainer>
       <Navbar>
-        <a href="/">Ana Sayfa</a>
-        <a href="/tarifler">Tarifler</a>
+        <a className={router.pathname === "/" ? "active" : ""} href="/">
+          Ana Sayfa
+        </a>
+        <a
+          href="/tarifler/"
+          className={router.pathname === "/tarifler" ? "active" : ""}
+        >
+          Tarifler
+        </a>
         <a href="#">Diyetler</a>
         <a href="#">Alerjiler</a>
         <a href="#">Blog</a>

@@ -19,5 +19,8 @@ export const Navbar = styled.nav`
     display: block;
     padding: 21px 16px;
     font-weight: 600;
+    &.active {
+      color: #47c757;
+    }
   }
 `;
