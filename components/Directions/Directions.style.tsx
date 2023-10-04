@@ -8,10 +8,14 @@ export const DirectionsWrapper = styled.div`
 
 export const DirectionWrapper = styled.div`
   display: flex;
+  align-items: center;
   gap: 30px;
 `;
 export const StepWrapper = styled.div`
   width: 10%;
+  @media (max-width: 768px) {
+    width: 18%;
+  }
 `;
 export const Step = styled.div`
   position: relative;

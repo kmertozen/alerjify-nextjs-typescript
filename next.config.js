@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["www.alerjify.com", "localhost", "0.0.0.0"],
+    domains: ["www.alerjify.com", "localhost", "0.0.0.0", "res.cloudinary.com"],
     remotePatterns: [
       {
         protocol: "http",

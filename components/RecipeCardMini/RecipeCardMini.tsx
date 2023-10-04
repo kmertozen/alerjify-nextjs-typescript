@@ -20,7 +20,11 @@ export default function RecipeCardMini({ data }: { data: Recipe }) {
     <RecipeCardMiniBase>
       <RecipeCardMiniImage>
         <a href={getRecipeDetailUrl(slug)} title={recipeTitle}>
-          <img src={prepareImageUrl(recipeImages?.data?.attributes?.url)} />
+          <img
+            src={prepareImageUrl(recipeImages?.data?.attributes?.url)}
+            alt={recipeTitle}
+            loading="lazy"
+          />
         </a>
       </RecipeCardMiniImage>
       <RecipeCardMiniInfo>

@@ -31,6 +31,9 @@ export const NavigatorLeft = styled.div`
   transition: all 0.2s ease 0s;
   z-index: 20;
   cursor: pointer;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 export const NavigatorRight = styled.div`
   width: 60px;
@@ -48,6 +51,9 @@ export const NavigatorRight = styled.div`
   transition: all 0.2s ease 0s;
   z-index: 20;
   cursor: pointer;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const Slide = styled.div`
@@ -93,6 +99,10 @@ export const HeroCard = styled.div`
     margin-bottom: 20px;
     line-height: 24px;
   }
+  @media (max-width: 768px) {
+    position: initial;
+    width: 100%;
+  }
 `;
 
 export const HeroSlider = styled.div`
@@ -101,5 +111,8 @@ export const HeroSlider = styled.div`
     width: 100%;
     height: 500px;
     object-fit: cover;
+    @media (max-width: 768px) {
+      height: 200px;
+    }
   }
 `;

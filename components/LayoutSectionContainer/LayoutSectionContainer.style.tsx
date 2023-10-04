@@ -6,6 +6,7 @@ export const LayoutSectionContainerBase = styled.div<{
   bgcolor?: string;
 }>`
   display: ${(props) => (props.flex ? "flex" : "block")};
+  flex-wrap: wrap;
   background-color: ${(props) => props.bgcolor || "#fff"};
   box-shadow: ${(props) =>
     props.headline ? "none" : "0 20px 25px rgb(0 0 0 / 15%)"};

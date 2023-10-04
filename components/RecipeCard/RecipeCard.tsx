@@ -15,6 +15,7 @@ import { FaHeart } from "react-icons/fa";
 import { Recipe } from "@/generated/graphql";
 import { getCategoryUrl, getRecipeDetailUrl } from "@/utils/url";
 import { prepareImageUrl } from "@/utils/image";
+import Image from "next/image";
 
 export default function RecipeCard({
   size = "small",
@@ -39,7 +40,15 @@ export default function RecipeCard({
       </SaveButton>
       <RecipeCardImage size={size}>
         <a href={getRecipeDetailUrl(slug)} title={recipeTitle}>
-          <img src={prepareImageUrl(recipeImages?.data?.attributes?.url)} />
+          <div style={{ position: "relative" }}>
+            <Image
+              src={prepareImageUrl(recipeImages?.data?.attributes?.url)}
+              alt={recipeTitle}
+              width={360}
+              height={250}
+              quality={100}
+            />
+          </div>
         </a>
       </RecipeCardImage>
       <RecipeCardInfo>

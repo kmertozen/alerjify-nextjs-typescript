@@ -2,7 +2,13 @@ import { styled } from "styled-components";
 
 export const RecipeContainer = styled.div`
   width: 70%;
+  max-width: 70%;
   padding: 16px;
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
 `;
 export const RecipeMetas = styled.div`
   display: flex;
@@ -39,6 +45,9 @@ export const RecipeInfos = styled.div`
   border-radius: 0 0 8px 8px;
   overflow: hidden;
   margin-bottom: 24px;
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 `;
 export const Info = styled.div`
   width: 25%;
@@ -48,6 +57,13 @@ export const Info = styled.div`
   align-items: center;
   padding: 12px;
   gap: 12px;
+  @media (max-width: 768px) {
+    width: 49%;
+    flex-direction: column;
+    text-align: center;
+    gap: 0;
+    padding: 10px 0 0 0;
+  }
 `;
 export const InfoIcon = styled.div``;
 
@@ -57,6 +73,9 @@ export const InfoText = styled.div`
 export const InfoTitle = styled.div`
   font-size: 18px;
   font-weight: 700;
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 export const InfoDescription = styled.div`
   font-size: 16px;
@@ -71,6 +90,9 @@ export const IngredientsWrapper = styled.div`
   background-color: #f2f2f2;
   padding: 24px;
   border-radius: 5px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 export const Ingredients = styled.div`
   background: #fff;

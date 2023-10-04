@@ -38,6 +38,11 @@ export const RecipeCardBase = styled.div<{ size: string }>`
       opacity: 1;
     }
   }
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 8px;
+  }
 `;
 
 export const RecipeCardImage = styled.div<{ size: string }>`
@@ -51,6 +56,9 @@ export const RecipeCardImage = styled.div<{ size: string }>`
       imageHeightMap[props.size as keyof typeof imageHeightMap]};
     object-fit: cover;
     border-radius: 8px;
+    @media (max-width: 768px) {
+      height: 250px;
+    }
   }
 `;
 
