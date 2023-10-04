@@ -6,9 +6,14 @@ import Layout from "@/components/Layout/Layout";
 import Head from "next/head";
 import dayjs from "dayjs";
 import "dayjs/locale/tr";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 import Script from "next/script";
 export default function App({ Component, pageProps }: AppProps) {
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
   dayjs.locale("tr");
+  dayjs.tz.setDefault("Europe/Istanbul");
   return (
     <>
       <Head>

@@ -42,7 +42,7 @@ export default function RecipeCardMini({ data }: { data: Recipe }) {
         <RecipeCardMiniInfoStats>
           <div>
             <FiClock color="#43c757" />
-            {dayjs(updatedAt).format("DD MMMM YYYY")}
+            {dayjs.tz(updatedAt).format("DD MMMM YYYY")}
           </div>
           <div>
             <FiHeart color="#43c757" />

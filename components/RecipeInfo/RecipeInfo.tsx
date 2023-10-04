@@ -59,7 +59,7 @@ const RecipeInfo = ({ recipe }: { recipe: Recipe }) => {
       </TitleWrapper>
       <RecipeMetas>
         <RecipeMeta>
-          <FaCalendarAlt color="#47c757" /> {dayjs(updatedAt).fromNow()}
+          <FaCalendarAlt color="#47c757" /> {dayjs.tz(updatedAt).fromNow()}
         </RecipeMeta>
         <RecipeMeta>
           <FaUser color="#47c757" /> Mert
