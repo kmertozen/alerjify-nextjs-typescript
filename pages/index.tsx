@@ -18,6 +18,7 @@ import { getTrendsData } from "@/service/internal/getTrends/getTrends";
 import { defaultMeta } from "@/utils/default";
 import { GetServerSideProps } from "next";
 import { useEffect } from "react";
+import { GoogleAdsenseContainer } from "@/components/GoogleAdsenseContainer/GoogleAdsenseContainer";
 
 export default function Home({
   interests,
@@ -45,9 +46,12 @@ export default function Home({
       {recipeCards && <Trio cards={recipeCards} />}
       <LayoutSectionContainer flex>
         {trends && <Trends trends={trends} />}
-
         <Interests interests={interests} />
       </LayoutSectionContainer>
+      <GoogleAdsenseContainer
+        client="ca-pub-5361129984468141"
+        slot="5481143302"
+      />
       <LayoutSectionContainer>
         <SectionTitle title="Son Eklenen Tarifler" />
         <LatestRecipes initialRecipes={latest} />

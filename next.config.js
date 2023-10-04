@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
   images: {
     domains: ["www.alerjify.com", "localhost", "0.0.0.0", "res.cloudinary.com"],
     remotePatterns: [
