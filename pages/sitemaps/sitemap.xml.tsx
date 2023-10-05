@@ -10,15 +10,15 @@ const generateSiteMap = async () => {
   return `<?xml version="1.0" encoding="UTF-8"?>
   <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       <sitemap>
-          <loc>${baseUrl}/sitemap/sitemap.recipes.xml</loc>
+          <loc>${baseUrl}/sitemaps/sitemap.recipes.xml</loc>
           <lastmod>${dayjs().format("YYYY-MM-DDTHH:mm:ssZ")}</lastmod>
       </sitemap>
       <sitemap>
-          <loc>${baseUrl}/sitemap/sitemap.categories.xml</loc>
+          <loc>${baseUrl}/sitemaps/sitemap.categories.xml</loc>
           <lastmod>${dayjs().format("YYYY-MM-DDTHH:mm:ssZ")}</lastmod>
       </sitemap>
       <sitemap>
-          <loc>${baseUrl}/sitemap/sitemap.tags.xml</loc>
+          <loc>${baseUrl}/sitemaps/sitemap.tags.xml</loc>
           <lastmod>${dayjs().format("YYYY-MM-DDTHH:mm:ssZ")}</lastmod>
       </sitemap>
      </sitemapindex>
