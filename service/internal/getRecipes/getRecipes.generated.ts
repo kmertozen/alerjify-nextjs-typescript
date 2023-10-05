@@ -1681,18 +1681,87 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
-export type GetRecipesQueryVariables = Types.Exact<{ [key: string]: never; }>;
+export type GetRecipesQueryVariables = Types.Exact<{
+  filters?: Types.InputMaybe<Types.RecipeFiltersInput>;
+  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  page?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  pageSize?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  sort?: Types.InputMaybe<Array<Types.InputMaybe<Types.Scalars['String']['input']>> | Types.InputMaybe<Types.Scalars['String']['input']>>;
+}>;
 
 
-export type GetRecipesQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', recipeTitle: string } | null }> } | null };
+export type GetRecipesQuery = { __typename?: 'Query', recipes?: { __typename?: 'RecipeEntityResponseCollection', data: Array<{ __typename?: 'RecipeEntity', attributes?: { __typename?: 'Recipe', slug: string, recipeTitle: string, recipeDescription?: string | null, personCount?: string | null, preparationTime?: string | null, cookingTime?: string | null, likeCount?: number | null, updatedAt?: any | null, recipeDirections?: { __typename?: 'ComponentRecipeDirections', id: string, direction?: Array<{ __typename?: 'ComponentRecipeDirection', id: string, text?: string | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null> | null } | null, recipeImages?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null, ingredients: Array<{ __typename?: 'ComponentRecipeIngredient', amount?: string | null, ingredient?: { __typename?: 'IngredientEntityResponse', data?: { __typename?: 'IngredientEntity', attributes?: { __typename?: 'Ingredient', ingredient_name?: string | null } | null } | null } | null } | null>, categories?: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', tag_name: string, slug: string } | null }> } | null } | null }>, meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', total: number } } } | null };
 
 
 export const GetRecipesDocument = `
-    query getRecipes {
-  recipes {
+    query getRecipes($filters: RecipeFiltersInput, $limit: Int, $page: Int, $pageSize: Int, $sort: [String]) {
+  recipes(
+    filters: $filters
+    pagination: {limit: $limit, page: $page, pageSize: $pageSize}
+    sort: $sort
+  ) {
     data {
       attributes {
+        slug
         recipeTitle
+        recipeDescription
+        recipeDirections {
+          id
+          direction {
+            id
+            text
+            image {
+              data {
+                attributes {
+                  url
+                }
+              }
+            }
+          }
+        }
+        recipeImages {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        personCount
+        preparationTime
+        cookingTime
+        ingredients {
+          amount
+          ingredient {
+            data {
+              attributes {
+                ingredient_name
+              }
+            }
+          }
+        }
+        categories {
+          data {
+            attributes {
+              categoryTitle
+              categorySlug
+            }
+          }
+        }
+        tags {
+          data {
+            attributes {
+              tag_name
+              slug
+            }
+          }
+        }
+        likeCount
+        updatedAt
+      }
+    }
+    meta {
+      pagination {
+        total
       }
     }
   }

@@ -20,10 +20,7 @@ const SearchInput = () => {
           }
         }}
       />
-      <SearchButton
-        type="button"
-        onClick={() => value !== "" && openSearchPage()}
-      >
+      <SearchButton type="button" onClick={() => openSearchPage()}>
         <FaSearch size={30} />
       </SearchButton>
     </InputWrapper>

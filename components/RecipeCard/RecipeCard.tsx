@@ -44,7 +44,7 @@ export default function RecipeCard({
             <Image
               src={prepareImageUrl(recipeImages?.data?.attributes?.url)}
               alt={recipeTitle}
-              width={360}
+              width={365}
               height={250}
               quality={100}
             />

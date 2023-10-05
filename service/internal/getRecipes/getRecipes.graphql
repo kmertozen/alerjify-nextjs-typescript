@@ -1,8 +1,77 @@
-query getRecipes {
-  recipes {
+query getRecipes(
+  $filters: RecipeFiltersInput
+  $limit: Int
+  $page: Int
+  $pageSize: Int
+  $sort: [String]
+) {
+  recipes(
+    filters: $filters
+    pagination: { limit: $limit, page: $page, pageSize: $pageSize }
+    sort: $sort
+  ) {
     data {
       attributes {
+        slug
         recipeTitle
+        recipeDescription
+        recipeDirections {
+          id
+          direction {
+            id
+            text
+            image {
+              data {
+                attributes {
+                  url
+                }
+              }
+            }
+          }
+        }
+        recipeImages {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        personCount
+        preparationTime
+        cookingTime
+        ingredients {
+          amount
+          ingredient {
+            data {
+              attributes {
+                ingredient_name
+              }
+            }
+          }
+        }
+        categories {
+          data {
+            attributes {
+              categoryTitle
+              categorySlug
+            }
+          }
+        }
+        tags {
+          data {
+            attributes {
+              tag_name
+              slug
+            }
+          }
+        }
+        likeCount
+        updatedAt
+      }
+    }
+    meta {
+      pagination {
+        total
       }
     }
   }
