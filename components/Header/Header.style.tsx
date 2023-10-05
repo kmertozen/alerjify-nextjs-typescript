@@ -3,10 +3,23 @@ import { styled } from "styled-components";
 export const HeaderContainer = styled.div`
   display: flex;
   background-color: #fff;
-  margin: 0 auto;
   padding: 16px;
-  justify-content: center;
   border-bottom: 1px solid #eeeeee;
+`;
+
+export const HeaderBase = styled.div`
+  width: 100%;
+  max-width: 1240px;
+  padding: 0 32px;
+  margin: 0 auto;
+  display: flex;
+  gap: 20%;
+  align-items: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 16px;
+  }
 `;
 
 export const Navbar = styled.nav`

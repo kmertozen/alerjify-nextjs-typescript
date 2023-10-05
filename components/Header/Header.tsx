@@ -1,21 +1,25 @@
 import { useRouter } from "next/router";
-import { HeaderContainer, Navbar } from "./Header.style";
+import { HeaderContainer, Navbar, HeaderBase } from "./Header.style";
 
 import React from "react";
+import SearchInput from "../SearchInput/SearchInput";
 
 function Header() {
   const router = useRouter();
   return (
     <>
       <HeaderContainer>
-        <a href="/">
-          <img
-            width="200"
-            className="py-2"
-            alt="Alerjify"
-            src="/alerjify.svg"
-          />
-        </a>
+        <HeaderBase>
+          <a href="/">
+            <img
+              width="200"
+              className="py-2"
+              alt="Alerjify"
+              src="/alerjify.svg"
+            />
+          </a>
+          <SearchInput />
+        </HeaderBase>
       </HeaderContainer>
       <Navbar>
         <a className={router.pathname === "/" ? "active" : ""} href="/">
