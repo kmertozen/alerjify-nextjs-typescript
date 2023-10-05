@@ -145,7 +145,7 @@ export const DirectionSection = styled.div`
   margin-top: 24px;
 `;
 
-export const Tags = styled.p`
+export const Tags = styled.div`
   margin-top: 24px;
   display: flex;
   align-items: center;
@@ -163,44 +163,48 @@ export const Tags = styled.p`
     color: #47c575;
     cursor: default;
   }
-  a {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-    padding: 6px 16px;
-    margin: 0.5em;
+  div {
+    display: flex;
+    flex-wrap: wrap;
+  }
+`;
+export const Tag = styled.a`
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  padding: 6px 16px;
+  margin: 8px 20px 8px 8px;
+  border-radius: 3px;
+  background-color: #f2f2f2;
+  font-size: 14px;
+  font-weight: 700;
+  color: #919191;
+  transition: transform 0.2s;
+  transition-timing-function: cubic-bezier(0.45, -0.85, 0.55, -0.45);
+  &::before {
+    content: "";
+    float: left;
+    position: absolute;
+    top: 0;
+    left: -18px;
+    width: 0;
+    height: 0;
+    border-color: transparent #f2f2f2 transparent transparent;
+    border-style: solid;
+    border-width: 15px 20px 15px 0;
+    transition: all ease-in-out 0.2s;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 0;
+    float: left;
+    width: 6px;
+    height: 6px;
     border-radius: 3px;
-    background-color: #f2f2f2;
-    font-size: 14px;
-    font-weight: 700;
-    color: #919191;
-    transition: transform 0.2s;
-    transition-timing-function: cubic-bezier(0.45, -0.85, 0.55, -0.45);
-    &::before {
-      content: "";
-      float: left;
-      position: absolute;
-      top: 0;
-      left: -18px;
-      width: 0;
-      height: 0;
-      border-color: transparent #f2f2f2 transparent transparent;
-      border-style: solid;
-      border-width: 15px 20px 15px 0;
-      transition: all ease-in-out 0.2s;
-    }
-    &::after {
-      content: "";
-      position: absolute;
-      top: 12px;
-      left: 0;
-      float: left;
-      width: 6px;
-      height: 6px;
-      border-radius: 3px;
-      background: #fff;
-    }
+    background: #fff;
   }
 `;

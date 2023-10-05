@@ -23,6 +23,7 @@ import {
   RecipeInfos,
   RecipeMeta,
   RecipeMetas,
+  Tag,
   Tags,
   TitleWrapper,
 } from "./RecipeInfo.style";
@@ -138,15 +139,17 @@ const RecipeInfo = ({ recipe }: { recipe: Recipe }) => {
       {tags?.data && tags?.data.length > 0 && (
         <Tags>
           <span>TAGS</span>
-          {tags?.data.map((tag, i) => (
-            <a
-              title={tag.attributes?.tag_name}
-              href={getTagUrl(tag.attributes?.slug)}
-              key={i}
-            >
-              {tag.attributes?.tag_name}
-            </a>
-          ))}
+          <div>
+            {tags?.data.map((tag, i) => (
+              <Tag
+                title={tag.attributes?.tag_name}
+                href={getTagUrl(tag.attributes?.slug)}
+                key={i}
+              >
+                {tag.attributes?.tag_name}
+              </Tag>
+            ))}
+          </div>
         </Tags>
       )}
     </RecipeContainer>
