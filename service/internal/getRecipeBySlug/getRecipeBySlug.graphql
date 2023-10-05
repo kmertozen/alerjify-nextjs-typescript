@@ -57,6 +57,7 @@ query getRecipeBySlug($slug: String) {
         }
         likeCount
         updatedAt
+        createdAt
       }
     }
   }

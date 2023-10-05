@@ -9,6 +9,7 @@ export const getRecipeSchema = (recipe?: Maybe<Recipe>) => {
     datePublished: recipe?.createdAt ?? "",
     description: recipe?.recipeDescription,
     image: recipe?.recipeImages?.data?.attributes?.url,
+    recipeCategory: recipe?.categories?.data?.[0]?.attributes?.categoryTitle,
     recipeIngredient: recipe?.ingredients?.map(
       (ingredient) =>
         `${ingredient?.amount ?? ""} ${
@@ -25,5 +26,8 @@ export const getRecipeSchema = (recipe?: Maybe<Recipe>) => {
         }),
       })
     ),
+    keywords: recipe?.tags?.data
+      ?.map((tag) => tag.attributes?.tag_name)
+      .join(", "),
   });
 };

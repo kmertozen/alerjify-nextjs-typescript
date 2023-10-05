@@ -46,7 +46,7 @@ const RecipeInfo = ({ recipe }: { recipe: Recipe }) => {
     recipeImages,
     tags,
     likeCount,
-    updatedAt,
+    createdAt,
   } = recipe;
 
   dayjs.extend(relativeTime);
@@ -59,7 +59,7 @@ const RecipeInfo = ({ recipe }: { recipe: Recipe }) => {
       </TitleWrapper>
       <RecipeMetas>
         <RecipeMeta>
-          <FaCalendarAlt color="#47c757" /> {dayjs.tz(updatedAt).fromNow()}
+          <FaCalendarAlt color="#47c757" /> {dayjs.tz(createdAt).fromNow()}
         </RecipeMeta>
         <RecipeMeta>
           <FaUser color="#47c757" /> Mert
