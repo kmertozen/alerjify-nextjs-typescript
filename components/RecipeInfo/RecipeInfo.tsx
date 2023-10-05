@@ -30,7 +30,6 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 import Directions from "../Directions/Directions";
 import { Recipe } from "@/generated/graphql";
 import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import { prepareImageUrl } from "@/utils/image";
 import { getTagUrl } from "@/utils/url";
 
@@ -49,7 +48,6 @@ const RecipeInfo = ({ recipe }: { recipe: Recipe }) => {
     createdAt,
   } = recipe;
 
-  dayjs.extend(relativeTime);
   //todo merge tags and categories
   //const mappedTags=[...tags,categories]
   return (
@@ -59,7 +57,8 @@ const RecipeInfo = ({ recipe }: { recipe: Recipe }) => {
       </TitleWrapper>
       <RecipeMetas>
         <RecipeMeta>
-          <FaCalendarAlt color="#47c757" /> {dayjs.tz(createdAt).fromNow()}
+          <FaCalendarAlt color="#47c757" />{" "}
+          {dayjs.tz(createdAt).format("DD MMMM YYYY")}
         </RecipeMeta>
         <RecipeMeta>
           <FaUser color="#47c757" /> Mert
