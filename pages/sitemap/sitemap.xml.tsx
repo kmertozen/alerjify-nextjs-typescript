@@ -12,20 +12,14 @@ const generateSiteMap = async () => {
       <sitemap>
           <loc>${baseUrl}/sitemap/sitemap.recipes.xml</loc>
           <lastmod>${dayjs().format("YYYY-MM-DDTHH:mm:ssZ")}</lastmod>
-          <changefreq>daily</changefreq>
-          <priority>1.0</priority>
       </sitemap>
       <sitemap>
           <loc>${baseUrl}/sitemap/sitemap.categories.xml</loc>
           <lastmod>${dayjs().format("YYYY-MM-DDTHH:mm:ssZ")}</lastmod>
-          <changefreq>daily</changefreq>
-          <priority>1.0</priority>
       </sitemap>
       <sitemap>
           <loc>${baseUrl}/sitemap/sitemap.tags.xml</loc>
           <lastmod>${dayjs().format("YYYY-MM-DDTHH:mm:ssZ")}</lastmod>
-          <changefreq>daily</changefreq>
-          <priority>1.0</priority>
       </sitemap>
      </sitemapindex>
    `;
