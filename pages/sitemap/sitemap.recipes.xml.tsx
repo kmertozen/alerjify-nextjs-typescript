@@ -23,7 +23,7 @@ const generateSiteMap = async () => {
        ?.map((recipe) => {
          return `
       <url>
-          <loc>${baseUrl}/${recipe?.slug}</loc>
+          <loc>${baseUrl}/tarif/${recipe?.slug}/</loc>
           <lastmod>${dayjs().format("YYYY-MM-DDTHH:mm:ssZ")}</lastmod>
           <changefreq>daily</changefreq>
           <priority>1.0</priority>

@@ -23,7 +23,7 @@ const generateSiteMap = async () => {
        ?.map((category) => {
          return `
       <url>
-          <loc>${baseUrl}/${category?.categorySlug}</loc>
+          <loc>${baseUrl}/kategori/${category?.categorySlug}/</loc>
           <lastmod>${dayjs().format("YYYY-MM-DDTHH:mm:ssZ")}</lastmod>
           <changefreq>daily</changefreq>
           <priority>1.0</priority>
