@@ -5,7 +5,6 @@ import React from "react";
 
 function Header() {
   const router = useRouter();
-  console.log(router);
   return (
     <>
       <HeaderContainer>

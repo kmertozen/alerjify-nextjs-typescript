@@ -9,6 +9,7 @@ import { getRecipesBySlugData } from "@/service/internal/getRecipeBySlug/getReci
 import { getSimilarRecipesByCategoryData } from "@/service/internal/getSimilarRecipesByCategory/getSimilarRecipesByCategory";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
+import { getRecipeSchema } from "@/utils/schema";
 
 function Tarif({
   recipe,
@@ -25,7 +26,7 @@ function Tarif({
         <RecipeInfo recipe={recipe} />
         <Interests interests={similarRecipes} />
       </LayoutSectionContainer>
-      {similarRecipes && (
+      {latest && (
         <LayoutSectionContainer>
           <SectionTitle title="Diğer Lezzetli Tarifler" />
           <LatestRecipes initialRecipes={latest} />
@@ -50,6 +51,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     5
   );
 
+  const schema = getRecipeSchema(recipe);
   if (recipe)
     return {
       props: {
@@ -59,6 +61,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
         meta: {
           title: `${recipe.recipeTitle} Tarifi Nasıl Yapılır? | Alerjify`,
           description: `${recipe.recipeDescription} tarifi, Gıda hassasiyetlerine uygun leziz tarifler, Alerjify'de!`,
+          schema: schema,
         },
       },
     };
