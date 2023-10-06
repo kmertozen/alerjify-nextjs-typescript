@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Input = styled.input`
   border: 0px;
   width: 100%;
-  font-family: "Open Sans", sans-serif;
   color: rgb(19, 23, 23);
   font-size: 15px;
   line-height: 20px;
