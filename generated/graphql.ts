@@ -1231,6 +1231,7 @@ export type Tag = {
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   recipes?: Maybe<RecipeRelationResponseCollection>;
   slug: Scalars['String']['output'];
+  tagDescription?: Maybe<Scalars['String']['output']>;
   tag_name: Scalars['String']['output'];
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -1269,6 +1270,7 @@ export type TagFiltersInput = {
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   recipes?: InputMaybe<RecipeFiltersInput>;
   slug?: InputMaybe<StringFilterInput>;
+  tagDescription?: InputMaybe<StringFilterInput>;
   tag_name?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
@@ -1277,6 +1279,7 @@ export type TagInput = {
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   recipes?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   slug?: InputMaybe<Scalars['String']['input']>;
+  tagDescription?: InputMaybe<Scalars['String']['input']>;
   tag_name?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1663,7 +1666,7 @@ export type GetCategoryInfoQueryVariables = Exact<{
 }>;
 
 
-export type GetCategoryInfoQuery = { __typename?: 'Query', categories?: { __typename?: 'CategoryEntityResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string } | null }> } | null };
+export type GetCategoryInfoQuery = { __typename?: 'Query', categories?: { __typename?: 'CategoryEntityResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes?: { __typename?: 'Category', categoryTitle: string, categorySlug: string, categoryDescription?: string | null } | null }> } | null };
 
 export type GetHomepageRecipeCardsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1718,7 +1721,7 @@ export type GetTagInfoQueryVariables = Exact<{
 }>;
 
 
-export type GetTagInfoQuery = { __typename?: 'Query', tags?: { __typename?: 'TagEntityResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', tag_name: string, slug: string } | null }> } | null };
+export type GetTagInfoQuery = { __typename?: 'Query', tags?: { __typename?: 'TagEntityResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', tag_name: string, slug: string, tagDescription?: string | null } | null }> } | null };
 
 export type GetTrendsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;

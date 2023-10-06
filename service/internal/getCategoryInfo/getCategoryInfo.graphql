@@ -4,6 +4,7 @@ query getCategoryInfo($category: String) {
       attributes {
         categoryTitle
         categorySlug
+        categoryDescription
       }
     }
   }

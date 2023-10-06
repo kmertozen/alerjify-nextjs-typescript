@@ -4,6 +4,7 @@ query getTagInfo($tag: String) {
       attributes {
         tag_name
         slug
+        tagDescription
       }
     }
   }

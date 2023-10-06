@@ -7,14 +7,12 @@ export const SectionTitleBase = styled.div`
   position: relative;
 
   h2 {
-    font-family: "Source Sans Pro";
     font-size: 26px;
     font-weight: 500;
     line-height: 36px;
     margin-bottom: 1rem;
   }
   h3 {
-    font-family: "Source Sans Pro";
     font-size: 26px;
     font-weight: 500;
     line-height: 36px;

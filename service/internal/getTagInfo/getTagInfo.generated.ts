@@ -1254,6 +1254,7 @@ export type Tag = {
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   recipes?: Maybe<RecipeRelationResponseCollection>;
   slug: Scalars['String']['output'];
+  tagDescription?: Maybe<Scalars['String']['output']>;
   tag_name: Scalars['String']['output'];
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -1292,6 +1293,7 @@ export type TagFiltersInput = {
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   recipes?: InputMaybe<RecipeFiltersInput>;
   slug?: InputMaybe<StringFilterInput>;
+  tagDescription?: InputMaybe<StringFilterInput>;
   tag_name?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
@@ -1300,6 +1302,7 @@ export type TagInput = {
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   recipes?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   slug?: InputMaybe<Scalars['String']['input']>;
+  tagDescription?: InputMaybe<Scalars['String']['input']>;
   tag_name?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1686,7 +1689,7 @@ export type GetTagInfoQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetTagInfoQuery = { __typename?: 'Query', tags?: { __typename?: 'TagEntityResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', tag_name: string, slug: string } | null }> } | null };
+export type GetTagInfoQuery = { __typename?: 'Query', tags?: { __typename?: 'TagEntityResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', tag_name: string, slug: string, tagDescription?: string | null } | null }> } | null };
 
 
 export const GetTagInfoDocument = `
@@ -1696,6 +1699,7 @@ export const GetTagInfoDocument = `
       attributes {
         tag_name
         slug
+        tagDescription
       }
     }
   }
