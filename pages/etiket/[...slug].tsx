@@ -46,7 +46,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
       props: {
         recipes,
         tagInfo,
-        meta: defaultMeta,
+        meta: {
+          title: `Pratik ve Sağlıklı ${tagInfo.tag_name} Yemek Tarifleri`,
+          description: tagInfo.tagDescription,
+        },
       },
     };
   return {
