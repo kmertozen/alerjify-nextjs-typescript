@@ -1,7 +1,8 @@
 import InfiniteScroll from "@/components/InfiniteScroll/InfiniteScroll";
 import LayoutSectionContainer from "@/components/LayoutSectionContainer/LayoutSectionContainer";
+import SectionCard from "@/components/SectionCard/SectionCard";
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
-import { Recipe } from "@/generated/graphql";
+import { Recipe, Tag } from "@/generated/graphql";
 import { getLatestRecipesData } from "@/service/internal/getLatestRecipes/getLatestRecipes";
 import { getTagInfoData } from "@/service/internal/getTagInfo/getTagInfo";
 import { defaultMeta } from "@/utils/default";
@@ -10,18 +11,23 @@ import React from "react";
 
 const Tarifler = ({
   recipes,
-  tagSlug,
-  tagName,
+  tagInfo,
 }: {
   recipes: Recipe[];
-  tagSlug: string;
-  tagName: string;
+  tagInfo: Tag;
 }) => {
   return (
-    <LayoutSectionContainer>
-      <SectionTitle title={`${tagName} Tarifler`} level="1" />
-      <InfiniteScroll initialRecipes={recipes} tag={tagSlug} />
-    </LayoutSectionContainer>
+    <>
+      <LayoutSectionContainer>
+        <SectionTitle title={`${tagInfo?.tag_name} Tarifler`} level="2" />
+        {tagInfo?.tagDescription && (
+          <SectionCard>
+            <p>{tagInfo?.tagDescription}</p>
+          </SectionCard>
+        )}
+        <InfiniteScroll initialRecipes={recipes} tag={tagInfo?.slug} />
+      </LayoutSectionContainer>
+    </>
   );
 };
 
@@ -34,12 +40,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     getTagInfoData(tagSlug),
     getLatestRecipesData(6, undefined, undefined, undefined, tagSlug),
   ]);
+  console.log(tagInfo);
   if (recipes && tagInfo)
     return {
       props: {
         recipes,
-        tagSlug,
-        tagName: tagInfo.tag_name,
+        tagInfo,
         meta: defaultMeta,
       },
     };

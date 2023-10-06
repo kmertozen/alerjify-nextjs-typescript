@@ -1,7 +1,8 @@
 import InfiniteScroll from "@/components/InfiniteScroll/InfiniteScroll";
 import LayoutSectionContainer from "@/components/LayoutSectionContainer/LayoutSectionContainer";
+import SectionCard from "@/components/SectionCard/SectionCard";
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
-import { Recipe } from "@/generated/graphql";
+import { Category, Recipe } from "@/generated/graphql";
 import { getCategoryInfoData } from "@/service/internal/getCategoryInfo/getCategoryInfo";
 import { getLatestRecipesData } from "@/service/internal/getLatestRecipes/getLatestRecipes";
 import { defaultMeta } from "@/utils/default";
@@ -10,17 +11,26 @@ import React from "react";
 
 const Tarifler = ({
   recipes,
-  categoryTitle,
-  categorySlug,
+  categoryInfo,
 }: {
   recipes: Recipe[];
-  categoryTitle: string;
-  categorySlug: string;
+  categoryInfo: Category;
 }) => {
   return (
     <LayoutSectionContainer>
-      <SectionTitle title={`${categoryTitle} Tarifleri`} level="1" />
-      <InfiniteScroll initialRecipes={recipes} category={categorySlug} />
+      <SectionTitle
+        title={`${categoryInfo.categoryTitle} Tarifleri`}
+        level="1"
+      />
+      {categoryInfo?.categoryDescription && (
+        <SectionCard>
+          <p>{categoryInfo?.categoryDescription}</p>
+        </SectionCard>
+      )}
+      <InfiniteScroll
+        initialRecipes={recipes}
+        category={categoryInfo.categorySlug}
+      />
     </LayoutSectionContainer>
   );
 };
@@ -39,8 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     return {
       props: {
         recipes,
-        categoryTitle: categoryInfo?.categoryTitle,
-        categorySlug,
+        categoryInfo: categoryInfo,
         meta: defaultMeta,
       },
     };
