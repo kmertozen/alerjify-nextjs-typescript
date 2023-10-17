@@ -8,7 +8,6 @@ import dayjs from "dayjs";
 import "dayjs/locale/tr";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
-import Script from "next/script";
 export default function App({ Component, pageProps }: AppProps) {
   dayjs.extend(utc);
   dayjs.extend(timezone);
@@ -33,13 +32,12 @@ export default function App({ Component, pageProps }: AppProps) {
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5361129984468141"
-          crossOrigin="anonymous"
-        ></script>
-        <Script
+          crossOrigin="anonymous"></script>
+        <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-BZ7FPPDRD2"
         />
-        <Script
+        <script
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer = window.dataLayer || [];
 		function gtag() {
