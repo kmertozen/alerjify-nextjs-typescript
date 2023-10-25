@@ -13,6 +13,7 @@ function Header() {
           <a href="/">
             <img
               width="200"
+              height="60"
               className="py-2"
               alt="Alerjify"
               src="/alerjify.svg"
@@ -27,8 +28,7 @@ function Header() {
         </a>
         <a
           href="/tarifler/"
-          className={router.pathname === "/tarifler" ? "active" : ""}
-        >
+          className={router.pathname === "/tarifler" ? "active" : ""}>
           Tarifler
         </a>
         <a href="#">Diyetler</a>
