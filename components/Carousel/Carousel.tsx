@@ -70,14 +70,14 @@ const Carousel = ({ slides }: { slides: Recipe[] }) => {
                     <img
                       src={prepareImageUrl(recipeImages?.data?.attributes?.url)}
                       alt={recipeTitle}
+                      loading={index === 0 ? "eager" : "lazy"}
                     />
                   </a>
                   <HeroCard>
                     <CategoryTitle
                       href={getCategoryUrl(
                         categories?.data[0].attributes?.categorySlug
-                      )}
-                    >
+                      )}>
                       {categories?.data[0].attributes?.categoryTitle}
                     </CategoryTitle>
                     <RecipeTitle href={getRecipeDetailUrl(slug)}>
