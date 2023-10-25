@@ -61,6 +61,8 @@ export default function Home({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  ctx.res.setHeader("Cache-Control", "max-age=0, public, s-maxage=86400");
+
   const [slider, recipeCards, trends, latest] = await Promise.all([
     getHomepageSlidersData(),
     getHomepageRecipeCardsData(),
