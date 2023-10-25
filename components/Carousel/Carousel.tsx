@@ -23,7 +23,7 @@ const Carousel = ({ slides }: { slides: Recipe[] }) => {
     speed: 2500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 3500,
     prevArrow: <SamplePrevArrow />,
     nextArrow: <SampleNextArrow />,
