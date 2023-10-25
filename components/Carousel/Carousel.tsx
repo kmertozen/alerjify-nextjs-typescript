@@ -20,11 +20,11 @@ const Carousel = ({ slides }: { slides: Recipe[] }) => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 3500,
+    speed: 2500,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2500,
+    autoplaySpeed: 3500,
     prevArrow: <SamplePrevArrow />,
     nextArrow: <SampleNextArrow />,
     className: "SliderContainer",
