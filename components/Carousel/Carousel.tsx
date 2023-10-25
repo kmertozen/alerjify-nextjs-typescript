@@ -20,7 +20,7 @@ const Carousel = ({ slides }: { slides: Recipe[] }) => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 1000,
+    speed: 2500,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
