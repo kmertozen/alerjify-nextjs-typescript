@@ -1,24 +1,32 @@
-import CardList from "@/components/CardList/CardList";
 import Carousel from "@/components/Carousel/Carousel";
-import Interests from "@/components/Interests/Interests";
-import LatestRecipes from "@/components/InfiniteScroll/InfiniteScroll";
 import LayoutSectionContainer from "@/components/LayoutSectionContainer/LayoutSectionContainer";
-import RecipeCard from "@/components/RecipeCard/RecipeCard";
-import RecipeCardMini from "@/components/RecipeCardMini/RecipeCardMini";
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
-import Trends from "@/components/Trends/Trends";
 import Trio from "@/components/Trio/Trio";
 import { Recipe } from "@/generated/graphql";
-import client from "@/service/internal/apolloClient";
 import { getHomepageRecipeCardsData } from "@/service/internal/getHomepageRecipeCards/getHomepageRecipeCards";
 import { getHomepageSlidersData } from "@/service/internal/getHomepageSliders/getHomepageSliders";
 import { getLatestRecipesData } from "@/service/internal/getLatestRecipes/getLatestRecipes";
-import { getRecipesData } from "@/service/internal/getRecipes/getRecipes";
 import { getTrendsData } from "@/service/internal/getTrends/getTrends";
 import { defaultMeta } from "@/utils/default";
 import { GetServerSideProps } from "next";
-import { useEffect } from "react";
 import { GoogleAdsenseContainer } from "@/components/GoogleAdsenseContainer/GoogleAdsenseContainer";
+import lazyHydrate from "next-lazy-hydrate";
+
+const Trends = lazyHydrate(() => import("@/components/Trends/Trends"), {
+  on: ["delay"],
+});
+const Interests = lazyHydrate(
+  () => import("@/components/Interests/Interests"),
+  {
+    on: ["delay"],
+  }
+);
+const LatestRecipes = lazyHydrate(
+  () => import("@/components/InfiniteScroll/InfiniteScroll"),
+  {
+    on: ["delay"],
+  }
+);
 
 export default function Home({
   interests,

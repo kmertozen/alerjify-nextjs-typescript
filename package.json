@@ -23,6 +23,7 @@
     "eslint-config-next": "13.4.3",
     "graphql": "^16.8.1",
     "next": "13.4.3",
+    "next-lazy-hydrate": "^1.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
