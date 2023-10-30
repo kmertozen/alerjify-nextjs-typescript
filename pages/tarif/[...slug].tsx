@@ -39,6 +39,8 @@ function Tarif({
 export default Tarif;
 
 export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
+  ctx.res.setHeader("Cache-Control", "max-age=0, public, s-maxage=86400");
+
   const { slug } = ctx.query;
 
   const [recipe, latest] = await Promise.all([

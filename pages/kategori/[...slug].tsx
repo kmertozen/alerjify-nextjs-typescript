@@ -38,6 +38,8 @@ const Tarifler = ({
 export default Tarifler;
 
 export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
+  ctx.res.setHeader("Cache-Control", "max-age=0, public, s-maxage=86400");
+
   const { slug } = ctx.query;
   const categorySlug = slug[0];
   const [categoryInfo, recipes] = await Promise.all([
