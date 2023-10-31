@@ -22,6 +22,7 @@ const Direction = ({
         <Step>{index}. adım</Step>
       </StepWrapper>
       <Description>
+        <p>{direction?.text}</p>
         {direction?.image?.data && (
           <StepImage>
             <img
@@ -31,7 +32,6 @@ const Direction = ({
             />
           </StepImage>
         )}
-        <p>{direction?.text}</p>
       </Description>
     </DirectionWrapper>
   );
