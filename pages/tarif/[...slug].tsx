@@ -62,8 +62,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
         latest,
         meta: {
           title: `${recipe.recipeTitle} Tarifi Nasıl Yapılır? ${
-            recipe.recipeDirections?.direction?.[0]?.image ? "(Resimli)" : " "
-          }| Alerjify`,
+            recipe.recipeDirections?.direction?.[0]?.image ? "(Resimli)" : ""
+          } | Alerjify`,
           description: `${recipe.recipeDescription} tarifi, Gıda hassasiyetlerine uygun leziz tarifler, Alerjify'de!`,
           schema: schema,
         },
