@@ -8,7 +8,7 @@ export const DirectionsWrapper = styled.div`
 
 export const DirectionWrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 30px;
 `;
 export const StepWrapper = styled.div`
@@ -43,6 +43,9 @@ export const Step = styled.div`
 export const Description = styled.div`
   width: 90%;
   line-height: 24px;
+  p {
+    margin-bottom: 10px;
+  }
 `;
 export const StepImage = styled.div`
   position: relative;
