@@ -52,7 +52,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
       props: {
         recipes,
         categoryInfo: categoryInfo,
-        meta: defaultMeta,
+        meta: {
+          title: `Sağlıklı, Pratik ve Lezzetli ${categoryInfo?.categoryTitle} Tarifleri`,
+          description: `Alerji ve Gıda Hassasiyetlerine uygun bulabileceğiniz pratik, lezzetli, nefis ${categoryInfo?.categoryTitle} tarifleri.`,
+        },
       },
     };
   return {
