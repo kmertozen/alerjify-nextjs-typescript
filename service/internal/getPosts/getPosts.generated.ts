@@ -182,6 +182,58 @@ export type AllergyRelationResponseCollection = {
   data: Array<AllergyEntity>;
 };
 
+export type Author = {
+  __typename?: 'Author';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  posts?: Maybe<PostRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type AuthorPostsArgs = {
+  filters?: InputMaybe<PostFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type AuthorEntity = {
+  __typename?: 'AuthorEntity';
+  attributes?: Maybe<Author>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
+export type AuthorEntityResponse = {
+  __typename?: 'AuthorEntityResponse';
+  data?: Maybe<AuthorEntity>;
+};
+
+export type AuthorEntityResponseCollection = {
+  __typename?: 'AuthorEntityResponseCollection';
+  data: Array<AuthorEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type AuthorFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<AuthorFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<AuthorFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<AuthorFiltersInput>>>;
+  posts?: InputMaybe<PostFiltersInput>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type AuthorInput = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  posts?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
 export type BooleanFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['Boolean']['input']>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars['Boolean']['input']>>>;
@@ -439,7 +491,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = Allergen | Allergy | Category | ComponentComponentsRecipeCards | ComponentComponentsSlider | ComponentRecipeAllergen | ComponentRecipeDirection | ComponentRecipeDirections | ComponentRecipeIngredient | Homepage | I18NLocale | Ingredient | Post | Recipe | Tag | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = Allergen | Allergy | Author | Category | ComponentComponentsRecipeCards | ComponentComponentsSlider | ComponentRecipeAllergen | ComponentRecipeDirection | ComponentRecipeDirections | ComponentRecipeIngredient | Homepage | I18NLocale | Ingredient | Post | Recipe | Tag | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Homepage = {
   __typename?: 'Homepage';
@@ -641,6 +693,7 @@ export type Mutation = {
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
   createAllergen?: Maybe<AllergenEntityResponse>;
   createAllergy?: Maybe<AllergyEntityResponse>;
+  createAuthor?: Maybe<AuthorEntityResponse>;
   createCategory?: Maybe<CategoryEntityResponse>;
   createIngredient?: Maybe<IngredientEntityResponse>;
   createPost?: Maybe<PostEntityResponse>;
@@ -654,6 +707,7 @@ export type Mutation = {
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   deleteAllergen?: Maybe<AllergenEntityResponse>;
   deleteAllergy?: Maybe<AllergyEntityResponse>;
+  deleteAuthor?: Maybe<AuthorEntityResponse>;
   deleteCategory?: Maybe<CategoryEntityResponse>;
   deleteHomepage?: Maybe<HomepageEntityResponse>;
   deleteIngredient?: Maybe<IngredientEntityResponse>;
@@ -679,6 +733,7 @@ export type Mutation = {
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateAllergen?: Maybe<AllergenEntityResponse>;
   updateAllergy?: Maybe<AllergyEntityResponse>;
+  updateAuthor?: Maybe<AuthorEntityResponse>;
   updateCategory?: Maybe<CategoryEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
   updateHomepage?: Maybe<HomepageEntityResponse>;
@@ -710,6 +765,11 @@ export type MutationCreateAllergenArgs = {
 
 export type MutationCreateAllergyArgs = {
   data: AllergyInput;
+};
+
+
+export type MutationCreateAuthorArgs = {
+  data: AuthorInput;
 };
 
 
@@ -764,6 +824,11 @@ export type MutationDeleteAllergenArgs = {
 
 
 export type MutationDeleteAllergyArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteAuthorArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -865,6 +930,12 @@ export type MutationUpdateAllergyArgs = {
 };
 
 
+export type MutationUpdateAuthorArgs = {
+  data: AuthorInput;
+  id: Scalars['ID']['input'];
+};
+
+
 export type MutationUpdateCategoryArgs = {
   data: CategoryInput;
   id: Scalars['ID']['input'];
@@ -955,7 +1026,10 @@ export type PaginationArg = {
 
 export type Post = {
   __typename?: 'Post';
+  author?: Maybe<AuthorEntityResponse>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  image: UploadFileEntityResponse;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   slug: Scalars['String']['output'];
   title: Scalars['String']['output'];
@@ -981,7 +1055,9 @@ export type PostEntityResponseCollection = {
 
 export type PostFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<PostFiltersInput>>>;
+  author?: InputMaybe<AuthorFiltersInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
+  description?: InputMaybe<StringFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<PostFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<PostFiltersInput>>>;
@@ -992,9 +1068,17 @@ export type PostFiltersInput = {
 };
 
 export type PostInput = {
+  author?: InputMaybe<Scalars['ID']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['ID']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PostRelationResponseCollection = {
+  __typename?: 'PostRelationResponseCollection';
+  data: Array<PostEntity>;
 };
 
 export enum PublicationState {
@@ -1008,6 +1092,8 @@ export type Query = {
   allergens?: Maybe<AllergenEntityResponseCollection>;
   allergies?: Maybe<AllergyEntityResponseCollection>;
   allergy?: Maybe<AllergyEntityResponse>;
+  author?: Maybe<AuthorEntityResponse>;
+  authors?: Maybe<AuthorEntityResponseCollection>;
   categories?: Maybe<CategoryEntityResponseCollection>;
   category?: Maybe<CategoryEntityResponse>;
   homepage?: Maybe<HomepageEntityResponse>;
@@ -1056,6 +1142,19 @@ export type QueryAllergiesArgs = {
 
 export type QueryAllergyArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QueryAuthorArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QueryAuthorsArgs = {
+  filters?: InputMaybe<AuthorFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
@@ -1772,7 +1871,7 @@ export type UsersPermissionsUserRelationResponseCollection = {
 export type GetPostsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type GetPostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', attributes?: { __typename?: 'Post', title: string, slug: string } | null }> } | null };
+export type GetPostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', attributes?: { __typename?: 'Post', title: string, slug: string, description?: string | null, createdAt?: any | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', name?: string | null } | null } | null } | null } | null }> } | null };
 
 
 export const GetPostsDocument = `
@@ -1782,6 +1881,22 @@ export const GetPostsDocument = `
       attributes {
         title
         slug
+        description
+        image {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        author {
+          data {
+            attributes {
+              name
+            }
+          }
+        }
+        createdAt
       }
     }
   }

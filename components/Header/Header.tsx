@@ -33,7 +33,7 @@ function Header() {
         </a>
         <a href="#">Diyetler</a>
         <a href="#">Alerjiler</a>
-        <a href="#">Blog</a>
+        <a href="/blog/">Blog</a>
       </Navbar>
     </>
   );

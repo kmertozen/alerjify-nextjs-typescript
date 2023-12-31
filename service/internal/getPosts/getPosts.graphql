@@ -5,6 +5,13 @@ query getPosts {
         title
         slug
         description
+        image {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
         author {
           data {
             attributes {
