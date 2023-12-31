@@ -1,0 +1,19 @@
+query getPosts {
+  posts {
+    data {
+      attributes {
+        title
+        slug
+        description
+        author {
+          data {
+            attributes {
+              name
+            }
+          }
+        }
+        createdAt
+      }
+    }
+  }
+}
