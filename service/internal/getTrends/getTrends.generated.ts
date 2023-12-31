@@ -196,6 +196,7 @@ export type BooleanFilterInput = {
   lt?: InputMaybe<Scalars['Boolean']['input']>;
   lte?: InputMaybe<Scalars['Boolean']['input']>;
   ne?: InputMaybe<Scalars['Boolean']['input']>;
+  nei?: InputMaybe<Scalars['Boolean']['input']>;
   not?: InputMaybe<BooleanFilterInput>;
   notContains?: InputMaybe<Scalars['Boolean']['input']>;
   notContainsi?: InputMaybe<Scalars['Boolean']['input']>;
@@ -396,6 +397,7 @@ export type DateTimeFilterInput = {
   lt?: InputMaybe<Scalars['DateTime']['input']>;
   lte?: InputMaybe<Scalars['DateTime']['input']>;
   ne?: InputMaybe<Scalars['DateTime']['input']>;
+  nei?: InputMaybe<Scalars['DateTime']['input']>;
   not?: InputMaybe<DateTimeFilterInput>;
   notContains?: InputMaybe<Scalars['DateTime']['input']>;
   notContainsi?: InputMaybe<Scalars['DateTime']['input']>;
@@ -426,6 +428,7 @@ export type FloatFilterInput = {
   lt?: InputMaybe<Scalars['Float']['input']>;
   lte?: InputMaybe<Scalars['Float']['input']>;
   ne?: InputMaybe<Scalars['Float']['input']>;
+  nei?: InputMaybe<Scalars['Float']['input']>;
   not?: InputMaybe<FloatFilterInput>;
   notContains?: InputMaybe<Scalars['Float']['input']>;
   notContainsi?: InputMaybe<Scalars['Float']['input']>;
@@ -436,7 +439,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = Allergen | Allergy | Category | ComponentComponentsRecipeCards | ComponentComponentsSlider | ComponentRecipeAllergen | ComponentRecipeDirection | ComponentRecipeDirections | ComponentRecipeIngredient | Homepage | I18NLocale | Ingredient | Recipe | Tag | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = Allergen | Allergy | Category | ComponentComponentsRecipeCards | ComponentComponentsSlider | ComponentRecipeAllergen | ComponentRecipeDirection | ComponentRecipeDirections | ComponentRecipeIngredient | Homepage | I18NLocale | Ingredient | Post | Recipe | Tag | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Homepage = {
   __typename?: 'Homepage';
@@ -514,6 +517,7 @@ export type IdFilterInput = {
   lt?: InputMaybe<Scalars['ID']['input']>;
   lte?: InputMaybe<Scalars['ID']['input']>;
   ne?: InputMaybe<Scalars['ID']['input']>;
+  nei?: InputMaybe<Scalars['ID']['input']>;
   not?: InputMaybe<IdFilterInput>;
   notContains?: InputMaybe<Scalars['ID']['input']>;
   notContainsi?: InputMaybe<Scalars['ID']['input']>;
@@ -595,6 +599,7 @@ export type IntFilterInput = {
   lt?: InputMaybe<Scalars['Int']['input']>;
   lte?: InputMaybe<Scalars['Int']['input']>;
   ne?: InputMaybe<Scalars['Int']['input']>;
+  nei?: InputMaybe<Scalars['Int']['input']>;
   not?: InputMaybe<IntFilterInput>;
   notContains?: InputMaybe<Scalars['Int']['input']>;
   notContainsi?: InputMaybe<Scalars['Int']['input']>;
@@ -619,6 +624,7 @@ export type JsonFilterInput = {
   lt?: InputMaybe<Scalars['JSON']['input']>;
   lte?: InputMaybe<Scalars['JSON']['input']>;
   ne?: InputMaybe<Scalars['JSON']['input']>;
+  nei?: InputMaybe<Scalars['JSON']['input']>;
   not?: InputMaybe<JsonFilterInput>;
   notContains?: InputMaybe<Scalars['JSON']['input']>;
   notContainsi?: InputMaybe<Scalars['JSON']['input']>;
@@ -637,6 +643,7 @@ export type Mutation = {
   createAllergy?: Maybe<AllergyEntityResponse>;
   createCategory?: Maybe<CategoryEntityResponse>;
   createIngredient?: Maybe<IngredientEntityResponse>;
+  createPost?: Maybe<PostEntityResponse>;
   createRecipe?: Maybe<RecipeEntityResponse>;
   createTag?: Maybe<TagEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
@@ -650,6 +657,7 @@ export type Mutation = {
   deleteCategory?: Maybe<CategoryEntityResponse>;
   deleteHomepage?: Maybe<HomepageEntityResponse>;
   deleteIngredient?: Maybe<IngredientEntityResponse>;
+  deletePost?: Maybe<PostEntityResponse>;
   deleteRecipe?: Maybe<RecipeEntityResponse>;
   deleteTag?: Maybe<TagEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
@@ -675,6 +683,7 @@ export type Mutation = {
   updateFileInfo: UploadFileEntityResponse;
   updateHomepage?: Maybe<HomepageEntityResponse>;
   updateIngredient?: Maybe<IngredientEntityResponse>;
+  updatePost?: Maybe<PostEntityResponse>;
   updateRecipe?: Maybe<RecipeEntityResponse>;
   updateTag?: Maybe<TagEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
@@ -711,6 +720,11 @@ export type MutationCreateCategoryArgs = {
 
 export type MutationCreateIngredientArgs = {
   data: IngredientInput;
+};
+
+
+export type MutationCreatePostArgs = {
+  data: PostInput;
 };
 
 
@@ -760,6 +774,11 @@ export type MutationDeleteCategoryArgs = {
 
 
 export type MutationDeleteIngredientArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationDeletePostArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -869,6 +888,12 @@ export type MutationUpdateIngredientArgs = {
 };
 
 
+export type MutationUpdatePostArgs = {
+  data: PostInput;
+  id: Scalars['ID']['input'];
+};
+
+
 export type MutationUpdateRecipeArgs = {
   data: RecipeInput;
   id: Scalars['ID']['input'];
@@ -928,6 +953,50 @@ export type PaginationArg = {
   start?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type Post = {
+  __typename?: 'Post';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  slug: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type PostEntity = {
+  __typename?: 'PostEntity';
+  attributes?: Maybe<Post>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
+export type PostEntityResponse = {
+  __typename?: 'PostEntityResponse';
+  data?: Maybe<PostEntity>;
+};
+
+export type PostEntityResponseCollection = {
+  __typename?: 'PostEntityResponseCollection';
+  data: Array<PostEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type PostFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<PostFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<PostFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<PostFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  slug?: InputMaybe<StringFilterInput>;
+  title?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type PostInput = {
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
 export enum PublicationState {
   Live = 'LIVE',
   Preview = 'PREVIEW'
@@ -947,6 +1016,8 @@ export type Query = {
   ingredient?: Maybe<IngredientEntityResponse>;
   ingredients?: Maybe<IngredientEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
+  post?: Maybe<PostEntityResponse>;
+  posts?: Maybe<PostEntityResponseCollection>;
   recipe?: Maybe<RecipeEntityResponse>;
   recipes?: Maybe<RecipeEntityResponseCollection>;
   tag?: Maybe<TagEntityResponse>;
@@ -1025,6 +1096,19 @@ export type QueryIngredientArgs = {
 
 export type QueryIngredientsArgs = {
   filters?: InputMaybe<IngredientFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryPostArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QueryPostsArgs = {
+  filters?: InputMaybe<PostFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -1238,6 +1322,7 @@ export type StringFilterInput = {
   lt?: InputMaybe<Scalars['String']['input']>;
   lte?: InputMaybe<Scalars['String']['input']>;
   ne?: InputMaybe<Scalars['String']['input']>;
+  nei?: InputMaybe<Scalars['String']['input']>;
   not?: InputMaybe<StringFilterInput>;
   notContains?: InputMaybe<Scalars['String']['input']>;
   notContainsi?: InputMaybe<Scalars['String']['input']>;
