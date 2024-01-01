@@ -11,9 +11,11 @@ export const PostCardBase = styled.div`
 export const PostCardImageWrapper = styled.div`
   border-radius: 8px;
   overflow: hidden;
+  height: 250px;
   img {
+    object-fit: cover;
     width: 100%;
-    height: auto;
+    height: 100%;
   }
 `;
 

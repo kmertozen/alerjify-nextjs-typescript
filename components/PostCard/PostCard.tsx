@@ -28,11 +28,11 @@ const PostCard = ({
 }) => {
   return (
     <PostCardBase>
-      <PostCardImageWrapper>
-        <a href={url}>
-          <img src="https://radiustheme.com/demo/wordpress/themes/ranna/wp-content/uploads/2019/09/blog11-630x650.jpg" />
-        </a>
-      </PostCardImageWrapper>
+      <a href={url} title={title}>
+        <PostCardImageWrapper>
+          <img src={imageUrl} alt={title} />
+        </PostCardImageWrapper>
+      </a>
       <PostCardMetas>
         <div>
           <FiUser size={20} color="#43c757" /> {author}
@@ -41,7 +41,11 @@ const PostCard = ({
           <FaRegCalendar size={20} color="#43c757" /> {date}
         </div>
       </PostCardMetas>
-      <PostCardTitle as={"h2"}>{title}</PostCardTitle>
+      <PostCardTitle as={"h2"}>
+        <a href={url} title={title}>
+          {title}
+        </a>
+      </PostCardTitle>
       <PostCardDescription>{description}</PostCardDescription>
       <PostCardButton href={url}>
         Devamını Oku <BsChevronRight />
