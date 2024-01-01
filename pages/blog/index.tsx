@@ -4,22 +4,16 @@ import SectionTitle from "@/components/SectionTitle/SectionTitle";
 import React from "react";
 import { GetServerSideProps } from "next";
 import { getPostsData } from "@/service/internal/getPosts/getPosts";
-import { Post } from "@/generated/graphql";
+import { Post, Recipe } from "@/generated/graphql";
 import PostCardsSection from "@/components/PostCardsSection/PostCardsSection";
+import Interests from "@/components/Interests/Interests";
+import { getLatestRecipesData } from "@/service/internal/getLatestRecipes/getLatestRecipes";
 
-const Blog = ({ posts }: { posts: Post[] }) => {
+const Blog = ({ posts, interests }: { posts: Post[]; interests: Recipe[] }) => {
   return (
-    <LayoutSectionContainer>
-      <SectionTitle title="Lezzetli Yazılar" level="1" />
-      <div
-        style={{
-          maxWidth: 768,
-          display: "flex",
-          width: "100%",
-          flexWrap: "wrap",
-        }}>
-        <PostCardsSection posts={posts} />
-      </div>
+    <LayoutSectionContainer flex>
+      <PostCardsSection posts={posts} />
+      <Interests interests={interests} />
     </LayoutSectionContainer>
   );
 };
@@ -27,10 +21,13 @@ const Blog = ({ posts }: { posts: Post[] }) => {
 export default Blog;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const posts = await getPostsData();
-  console.log(posts);
+  const [posts, latest] = await Promise.all([
+    getPostsData(),
+    getLatestRecipesData(6),
+  ]);
+  const interests = latest?.filter((recipe, index) => index < 5);
 
   return {
-    props: { posts },
+    props: { posts, interests },
   };
 };

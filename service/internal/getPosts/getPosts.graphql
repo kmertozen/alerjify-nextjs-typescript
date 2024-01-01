@@ -1,5 +1,5 @@
-query getPosts {
-  posts {
+query getPosts($filters: PostFiltersInput) {
+  posts(filters: $filters) {
     data {
       attributes {
         title

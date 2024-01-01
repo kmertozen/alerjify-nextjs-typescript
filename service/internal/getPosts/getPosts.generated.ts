@@ -1868,15 +1868,17 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
-export type GetPostsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+export type GetPostsQueryVariables = Types.Exact<{
+  filters?: Types.InputMaybe<Types.PostFiltersInput>;
+}>;
 
 
 export type GetPostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', attributes?: { __typename?: 'Post', title: string, slug: string, description?: string | null, createdAt?: any | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null }, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', attributes?: { __typename?: 'Author', name?: string | null } | null } | null } | null } | null }> } | null };
 
 
 export const GetPostsDocument = `
-    query getPosts {
-  posts {
+    query getPosts($filters: PostFiltersInput) {
+  posts(filters: $filters) {
     data {
       attributes {
         title
